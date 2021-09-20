@@ -1,3 +1,5 @@
+import { Sheet } from "./Sheet";
+
 export class Container{
 
   constructor(width, height, x, y){
@@ -12,7 +14,7 @@ export class Container{
   x: number;
   y: number;
   used?: boolean = false;
-  right?: Container;
-  bottom?: Container;
+  right?: Sheet;
+  bottom?: Sheet;
 
 }

@@ -4,24 +4,32 @@ import { Sheet } from "./Sheet";
 
 export class Packer {
 
-  sheets: Sheet[]
+  sheet: Sheet
   items: Item[]
+  padding: number = 2
 
-  constructor(items: Item[], sheets: Sheet[]){
+  constructor(items: Item[], sheet: Sheet){
     this.items = items
-    this.sheets = sheets
+    this.sheet = sheet
   }
 
-  pack(sheet: Sheet, items: Item[]){
-    items.sort( (a: Item, b:Item) => a.width - b.width)
+  pack(){
+    this.items.sort( (a: Item, b:Item) => a.width - b.width).reverse()
 
-    items.forEach( item => {
-      let _sheet = this.findNode(sheet, item)
-      let fit = this.splitNode(_sheet, item)
-      if(fit){
-        item.used = true
+    this.items.forEach( item => {
+      let _sheet = this.findNode(this.sheet, item)
+
+      if(_sheet){
+        let fit = this.splitNode(_sheet, item)
+
+        if(fit){
+          item.used = true
+        }
       }
+
     })
+    console.log(this);
+
   }
 
   findNode(sheet: Sheet, item: Item){
@@ -39,8 +47,14 @@ export class Packer {
 
   splitNode(sheet: Sheet, item: Item){
     sheet.used = true;
-    sheet.bottom = { x: sheet.x, y: sheet.y + item.height, width: sheet.width, height: sheet.height - item.height}
-    sheet.right = { x: sheet.x + item.width, y: sheet.y, width: sheet.width - item.width, height: sheet.height}
+    sheet.bottom = { x: sheet.x, y: sheet.y + item.height, width: sheet.width, height: sheet.height - item.height, items: []}
+    sheet.right = { x: sheet.x + item.width, y: sheet.y, width: sheet.width - item.width, height: sheet.height, items: []}
+
+    item.x = sheet.x
+    item.y = sheet.y
+
+    sheet.items.push(item)
+
     return sheet;
   }
 }
