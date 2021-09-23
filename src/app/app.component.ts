@@ -6,9 +6,13 @@ import { Sheet } from 'src/Packer/Sheet';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
+  width;
+  height;
+
   title = 'packing2d';
 
   packer: Packer;
@@ -16,13 +20,14 @@ export class AppComponent implements OnInit {
   sheet: Sheet = new Sheet(400, 400, 0, 0, []);
 
   items: Item[] = [
-    {height: 100, width: 200, used: false},
-    {height: 200, width: 200, used: false},
-    {height: 200, width: 100, used: false},
-    {height: 180, width: 180, used: false},
-    {height: 200, width: 50, used: false},
-    {height: 100, width: 400, used: false},
-    {height: 400, width: 100, used: false},
+    {height: 100, width: 300, used: false},
+    {height: 50, width: 300, used: false},
+    {height: 100, width: 150, used: false},
+    {height: 100, width: 180, used: false},
+    {height: 180, width: 100, used: false},
+    {height: 400, width: 80, used: false},
+    {height: 90, width: 180, used: false},
+    {height: 10, width: 100, used: false},
   ]
 
   constructor(){

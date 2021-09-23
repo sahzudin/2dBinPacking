@@ -1,3 +1,5 @@
+import { Sheet } from "./Sheet"
+
 export class Item{
 
   width: number
@@ -5,6 +7,7 @@ export class Item{
   x?: number
   y?: number
   used: boolean = false
+  sheet?: Sheet
 
 
 }
