@@ -6,7 +6,7 @@ export class Packer {
 
   sheet: Sheet
   items: Item[]
-  padding: number = 2
+  padding: number = 20
 
   constructor(items: Item[], sheet: Sheet){
     this.items = items
@@ -37,7 +37,7 @@ export class Packer {
     //If sheet is used, check it's nodes recursively
     if(sheet.used){
       return this.findNode(sheet.right, item) || this.findNode(sheet.bottom, item)
-    } else if(sheet.width >= item.width && sheet.height >= item.height){
+    } else if(sheet.width >= item.width + this.padding && sheet.height >= item.height + this.padding){
       return sheet;
     } else {
       return null
@@ -47,8 +47,8 @@ export class Packer {
 
   splitNode(sheet: Sheet, item: Item){
     sheet.used = true;
-    sheet.bottom = { x: sheet.x, y: sheet.y + item.height, width: sheet.width, height: sheet.height - item.height, items: []}
-    sheet.right = { x: sheet.x + item.width, y: sheet.y, width: sheet.width - item.width, height: sheet.height, items: []}
+    sheet.bottom = { x: sheet.x, y: sheet.y + item.height + this.padding, width: sheet.width, height: sheet.height - item.height, items: []}
+    sheet.right = { x: sheet.x + item.width + this.padding, y: sheet.y, width: sheet.width - item.width, height: sheet.height, items: []}
 
     item.x = sheet.x
     item.y = sheet.y

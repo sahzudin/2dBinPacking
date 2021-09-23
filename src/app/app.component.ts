@@ -18,6 +18,9 @@ export class AppComponent implements OnInit {
   items: Item[] = [
     {height: 100, width: 200, used: false},
     {height: 200, width: 200, used: false},
+    {height: 200, width: 100, used: false},
+    {height: 180, width: 180, used: false},
+    {height: 200, width: 50, used: false},
     {height: 100, width: 400, used: false},
     {height: 400, width: 100, used: false},
   ]
