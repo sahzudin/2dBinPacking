@@ -1,16 +1,34 @@
 
 <div class="wrapper">
-  
-  <div class="data-container">
-    <p-inputNumber [(ngModel)]="width" name="width" ngDefaultControl></p-inputNumber>
-    <p-inputNumber [(ngModel)]="height" name="height" ngDefaultControl></p-inputNumber>
 
+  <div class="data-container">
+    <form [formGroup]="form">
+
+      <div class="form-group">
+        <label for="Width">Width</label>
+        <input type="number" formControlName="width"/>
+      </div>
+
+      <div class="form-group">
+        <label for="Height">Height</label>
+        <input type="number" formControlName="height"/>
+      </div>
+
+      <div class="form-group">
+        <label for="Quantity">Quantity</label>
+        <input type="number" formControlName="quantity"/>
+      </div>
+
+      <button pButton type="button" label="Add" (click)="add()"></button>
+    </form>
+
+    <app-items-info [items]="items"></app-items-info>
   </div>
 
   <div class="visual-container">
     <div class="sheet" [ngStyle]="{'width.px': packer.sheet.width, 'height.px': packer.sheet.height}">
-    
-      <ng-container *ngFor="let item of items">
+
+      <ng-container *ngFor="let item of packer.items">
         <div class="item" *ngIf="item.used"
           [style.left.px]="item.x"
           [style.top.px]="item.y"
@@ -18,16 +36,16 @@
           {{item.width +' x '+ item.height}}
         </div>
       </ng-container>
-    
+
       <ng-container *ngFor="let sheet of packer.nodes">
-        <div class="node" 
+        <div class="node"
           [style.left.px]="sheet.x"
           [style.top.px]="sheet.y"
           [ngStyle]="{'width.px': sheet.width, 'height.px': sheet.height}">
           <span class="sheet-dimensions">{{sheet.width + ' x ' + sheet.height}}</span>
         </div>
       </ng-container>
-    
+
     </div>
   </div>
 </div>

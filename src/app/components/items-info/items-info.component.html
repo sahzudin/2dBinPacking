@@ -1,0 +1,12 @@
+<div class="items-container">
+
+  <div class="item-container" *ngFor="let item of items">
+    <div class="item-size">{{item.width + ' x ' + item.height}}</div>
+    <div class="item-used">
+      <i class="pi pi-times" *ngIf="!item.used"></i>
+      <i class="pi pi-check" *ngIf="item.used"></i>
+    </div>
+    <div class="remove" (click)="remove(item)">Remove</div>
+  </div>
+
+</div>
