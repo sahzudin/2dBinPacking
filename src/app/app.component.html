@@ -2,25 +2,8 @@
 <div class="wrapper">
 
   <div class="data-container">
-    <form [formGroup]="form">
 
-      <div class="form-group">
-        <label for="Width">Width</label>
-        <input type="number" formControlName="width"/>
-      </div>
-
-      <div class="form-group">
-        <label for="Height">Height</label>
-        <input type="number" formControlName="height"/>
-      </div>
-
-      <div class="form-group">
-        <label for="Quantity">Quantity</label>
-        <input type="number" formControlName="quantity"/>
-      </div>
-
-      <button pButton type="button" label="Add" (click)="add()"></button>
-    </form>
+    <app-item-form></app-item-form>
 
     <app-items-info [items]="items"></app-items-info>
   </div>
@@ -38,7 +21,7 @@
       </ng-container>
 
       <ng-container *ngFor="let sheet of packer.nodes">
-        <div class="node"
+        <div class="node" *ngIf="!sheet.used"
           [style.left.px]="sheet.x"
           [style.top.px]="sheet.y"
           [ngStyle]="{'width.px': sheet.width, 'height.px': sheet.height}">

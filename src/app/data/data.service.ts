@@ -26,4 +26,8 @@ export class DataService {
     let newList = this.items.getValue().splice(index, 1)
     this.items.next(newList)
   }
+
+  removeAll(){
+    this.items.next([]);
+  }
 }

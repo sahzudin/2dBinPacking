@@ -6,11 +6,13 @@ import {ButtonModule} from 'primeng/button';
 
 import { AppComponent } from './app.component';
 import { ItemsInfoComponent } from './components/items-info/items-info.component';
+import { ItemFormComponent } from './components/item-form/item-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ItemsInfoComponent
+    ItemsInfoComponent,
+    ItemFormComponent
   ],
   imports: [
     BrowserModule,

@@ -16,46 +16,26 @@ export class AppComponent implements OnInit {
 
   title = 'packing2d';
 
+  items: Item[]
+
   packer: Packer;
-
-  sheet: Sheet = new Sheet(400, 400, 0, 0, []);
-
-  items: Item[] = [
-    {width: 100, height: 100, used: false},
-    {width: 100, height: 100, used: false},
-    {width: 100, height: 100, used: false},
-    {width: 100, height: 100, used: false},
-  ];
 
   constructor(
     private fb: FormBuilder,
     private ds: DataService
   ){
-    this.packer = new Packer(this.items, this.sheet);
   }
 
   ngOnInit(){
 
-    this.form = this.fb.group({
-      width: ['', [Validators.required]],
-      height: ['', [Validators.required]],
-      quantity: [1, [Validators.required]],
-    })
-
     this.ds.items.subscribe(res => {
-      this.items = res;
-      this.sheet = new Sheet(400, 400, 0, 0, []);
-      console.log(res);
+      this.items = res
+      let sheet = new Sheet(400, 400, 0, 0, []);
 
-      this.packer = new Packer(this.items, this.sheet)
+      this.packer = new Packer(res, sheet)
       this.packer.pack();
     })
 
   }
-
-  add(){
-    this.ds.addItem(this.form.value)
-  }
-
 
 }

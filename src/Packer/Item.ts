@@ -7,6 +7,7 @@ export class Item{
     this.height = height
   }
 
+  name?: string
   width: number
   height: number
   x?: number

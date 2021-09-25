@@ -15,17 +15,18 @@ export class Packer {
   }
 
   pack(){
+    this.items.map( x => {
+      x.used = false
+    })
+
     this.items.sort( (a: Item, b:Item) => a.width - b.width).reverse()
 
     this.items.forEach( item => {
-      let _sheet = this.findNode(this.sheet, item)
+      let fittingSheet = this.findNode(this.sheet, item)
 
-      if(_sheet){
-        let fit = this.splitNode(_sheet, item)
-
-        if(fit){
-          item.used = true
-        }
+      if(fittingSheet){
+        item.used = true;
+        this.splitNode(fittingSheet, item)
       }
 
     })
@@ -37,32 +38,25 @@ export class Packer {
     //If sheet is used, check it's nodes recursively
     if(sheet.used){
       return this.findNode(sheet.right, item) || this.findNode(sheet.bottom, item)
-    } else if(sheet.x + sheet.width == this.sheet.width){
-      if(sheet.width >= item.width && sheet.height >= item.height){
-        return sheet;
-      }
-    }else if(sheet.width >= item.width && sheet.height >= item.height){
-      return sheet;
-    }else {
-      return null
+    } else{
+      return sheet.width >= item.width && sheet.height >= item.height ? sheet: false;
     }
-
   }
 
   splitNode(sheet: Sheet, item: Item){
     sheet.used = true;
-    sheet.bottom = { 
-      x: sheet.x, 
-      y: sheet.y + item.height + this.padding, 
-      width: item.width, 
-      height: sheet.height - item.height - this.padding, 
+    sheet.bottom = {
+      x: sheet.x,
+      y: sheet.y + item.height + this.padding,
+      width: item.width,
+      height: sheet.height - item.height - this.padding,
       items: []
     }
-    sheet.right = { 
-      x: sheet.x + item.width + this.padding, 
-      y: sheet.y, 
-      width: sheet.width - item.width - this.padding, 
-      height: sheet.height, 
+    sheet.right = {
+      x: sheet.x + item.width + this.padding,
+      y: sheet.y,
+      width: sheet.width - item.width - this.padding,
+      height: sheet.height,
       items: []
     }
 
