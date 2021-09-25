@@ -30,9 +30,8 @@ export class AppComponent implements OnInit {
 
     this.ds.items.subscribe(res => {
       this.items = res
-      let sheet = new Sheet(400, 400, 0, 0, []);
 
-      this.packer = new Packer(res, sheet)
+      this.packer = new Packer(res)
       this.packer.pack();
     })
 

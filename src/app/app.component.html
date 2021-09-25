@@ -9,10 +9,10 @@
   </div>
 
   <div class="visual-container">
-    <div class="sheet" [ngStyle]="{'width.px': packer.sheet.width, 'height.px': packer.sheet.height}">
+    <div class="sheet" [ngStyle]="{'width.px': packer.config.width, 'height.px': packer.config.height}" *ngFor="let sheet of packer.sheets">
 
-      <ng-container *ngFor="let item of packer.items">
-        <div class="item" *ngIf="item.used"
+      <ng-container *ngFor="let item of sheet.items">
+        <div class="item"
           [style.left.px]="item.x"
           [style.top.px]="item.y"
           [ngStyle]="{'width.px': item.width, 'height.px': item.height}">
@@ -20,7 +20,7 @@
         </div>
       </ng-container>
 
-      <ng-container *ngFor="let sheet of packer.nodes">
+      <ng-container *ngFor="let sheet of sheet.nodes">
         <div class="node" *ngIf="!sheet.used"
           [style.left.px]="sheet.x"
           [style.top.px]="sheet.y"
