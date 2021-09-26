@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { ItemsInfoComponent } from './components/items-info/items-info.component';
 import { ItemFormComponent } from './components/item-form/item-form.component';
 import {TableModule} from 'primeng/table';
+import {DialogModule} from 'primeng/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import {TableModule} from 'primeng/table';
     InputTextModule,
     ButtonModule,
     ReactiveFormsModule,
-    TableModule
+    TableModule,
+    DialogModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

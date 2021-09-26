@@ -9,6 +9,7 @@ import { Item } from 'src/Packer/Item';
 })
 export class ItemsInfoComponent implements OnInit {
 
+  display: boolean = false;
   @Input() items: Item[];
   @Input() itemsUsagePercentage: number;
 
@@ -20,5 +21,9 @@ export class ItemsInfoComponent implements OnInit {
   remove(item){
     this.ds.removeItem(item)
   }
+
+  showDialog() {
+    this.display = true;
+}
 
 }

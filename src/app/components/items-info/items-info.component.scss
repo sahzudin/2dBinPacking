@@ -3,16 +3,25 @@
   flex-direction: column;
   padding: 15px;
 
-  h2{
-    display: flex;
-    justify-content: space-between;
-  }
-
   .item-container{
     display: flex;
   }
 
   .clear-button{
     margin-top: 10px;
+  }
+}
+
+.info-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 span{
+    margin-right: 15px;
+  }
+
+  button{
+    height: max-content;
   }
 }
