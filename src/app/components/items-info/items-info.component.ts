@@ -10,6 +10,7 @@ import { Item } from 'src/Packer/Item';
 export class ItemsInfoComponent implements OnInit {
 
   @Input() items: Item[];
+  @Input() itemsUsagePercentage: number;
 
   constructor(private ds: DataService) { }
 

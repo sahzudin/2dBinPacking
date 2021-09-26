@@ -1,0 +1,23 @@
+
+
+form{
+  display: flex;
+  align-items: flex-end;
+  padding: 15px;
+
+  .form-group{
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+
+    input{
+      border-radius: 5px;
+      padding: 5px;
+    }
+  }
+}
+
+.buttons-container{
+  display: flex;
+  justify-content: flex-end;
+}

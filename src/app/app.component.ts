@@ -37,4 +37,11 @@ export class AppComponent implements OnInit {
 
   }
 
+  pack(){
+    this.packer.pack();
+  }
+
+  clear(){
+    this.ds.removeAll();
+  }
 }

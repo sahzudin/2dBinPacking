@@ -8,6 +8,7 @@ export class Sheet extends Container{
   isRoot?: boolean = false;
   next?: Sheet;
   padding?: number;
+  efficiency?: number
 
   constructor(width?: number, height?: number, x?: number, y?:number, items?: Item[], isRoot?: boolean, padding?: number){
     super(width, height, x, y);
@@ -71,5 +72,22 @@ export class Sheet extends Container{
     this.items.push(item)
 
     return sheet;
+  }
+
+  calculateEfficiency(){
+    if(this.items.length > 0){
+      let area = this.width * this.height
+
+      let freeArea = 0;
+      this.nodes.forEach(node => {
+        if(!node.used){
+          let nodeArea = node.width * node.height
+          freeArea += nodeArea
+        }
+      })
+      this.efficiency =  100 - (freeArea/area) * 100;
+    }else{
+      this.efficiency = 0;
+    }
   }
 }

@@ -20,8 +20,8 @@ export class ItemFormComponent implements OnInit {
 
     this.form = this.fb.group({
       name: ['item 1', [Validators.required]],
-      width: [400, [Validators.required]],
-      height: [400, [Validators.required]],
+      width: [100, [Validators.required]],
+      height: [100, [Validators.required]],
       quantity: [1, [Validators.required]],
     })
 
@@ -30,10 +30,5 @@ export class ItemFormComponent implements OnInit {
   add(){
     this.ds.addItem(this.form.value)
   }
-
-  clear(){
-    this.ds.removeAll();
-  }
-
 
 }

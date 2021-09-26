@@ -7,6 +7,7 @@ import {ButtonModule} from 'primeng/button';
 import { AppComponent } from './app.component';
 import { ItemsInfoComponent } from './components/items-info/items-info.component';
 import { ItemFormComponent } from './components/item-form/item-form.component';
+import {TableModule} from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ItemFormComponent } from './components/item-form/item-form.component';
     BrowserModule,
     InputTextModule,
     ButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

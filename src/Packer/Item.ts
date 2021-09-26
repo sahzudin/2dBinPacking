@@ -15,5 +15,11 @@ export class Item{
   used: boolean = false
   sheet?: Sheet
 
+  reset(){
+    this.x = undefined
+    this.y = undefined
+    this.used = false
+    this.sheet = undefined
+  }
 
 }

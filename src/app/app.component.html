@@ -5,12 +5,19 @@
 
     <app-item-form></app-item-form>
 
-    <app-items-info [items]="items"></app-items-info>
+    <app-items-info [items]="items" [itemsUsagePercentage]="packer.itemsUsagePercent"></app-items-info>
+
+    <div class="buttons-container">
+      <button pButton type="button" label="Pack" class="p-button clear-button" (click)="pack()" *ngIf="items.length > 0"></button>
+      <button pButton type="button" label="Remove all" class="p-button-danger clear-button" (click)="clear()" *ngIf="items.length > 0"></button>
+    </div>
+
   </div>
 
   <div class="visual-container">
     <div class="sheet" [ngStyle]="{'width.px': packer.config.width, 'height.px': packer.config.height}" *ngFor="let sheet of packer.sheets">
 
+      <div class="space-used" [ngClass]="sheet.efficiency > 85 ? 'high' : sheet.efficiency < 50 ? 'low' : 'medium'">{{sheet.efficiency | number: '2.2'}} % space used</div>
       <ng-container *ngFor="let item of sheet.items">
         <div class="item"
           [style.left.px]="item.x"

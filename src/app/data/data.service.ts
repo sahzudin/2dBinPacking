@@ -17,6 +17,9 @@ export class DataService {
       let x = new Item(item.width, item.height)
       newItems.push(x);
     }
+    this.items.getValue().map(x => {
+      x.reset();
+    })
 
     this.items.next([...newItems, ...this.items.getValue()])
   }
