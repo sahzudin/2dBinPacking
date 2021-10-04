@@ -1,0 +1,30 @@
+<p-dialog header="Bin configuration" [(visible)]="display">
+
+  <div class="config-container">
+
+    <form [formGroup]="form">
+
+      <div class="form-group">
+        <label for="Width">Width</label>
+        <input type="text" formControlName="width"/>
+      </div>
+
+      <div class="form-group">
+        <label for="Width">Height</label>
+        <input type="number" formControlName="height"/>
+      </div>
+
+      <div class="form-group">
+        <label for="Height">Padding</label>
+        <input type="number" formControlName="padding"/>
+      </div>
+
+      <p-button label="Save" icon="pi pi-plus" styleClass="p-button-sm" (click)="applyConfiguration()"></p-button>
+    </form>
+
+  </div>
+
+</p-dialog>
+
+<button (click)="display = true">Config</button>
+

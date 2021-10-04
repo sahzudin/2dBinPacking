@@ -4,6 +4,7 @@ import { Item } from 'src/Packer/Item';
 import { Packer } from 'src/Packer/Packer';
 import { Sheet } from 'src/Packer/Sheet';
 import { DataService } from './data/data.service';
+import { PackerService } from './services/packer.service';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private ds: DataService
+    private ds: DataService,
+    private packerService: PackerService
   ){
   }
 
@@ -31,7 +33,7 @@ export class AppComponent implements OnInit {
     this.ds.items.subscribe(res => {
       this.items = res
 
-      this.packer = new Packer(res)
+      this.packer = new Packer(this.packerService ,res)
       this.packer.pack();
     })
 

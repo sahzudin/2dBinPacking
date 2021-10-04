@@ -10,12 +10,14 @@ import { ItemFormComponent } from './components/item-form/item-form.component';
 import {TableModule} from 'primeng/table';
 import {DialogModule} from 'primeng/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConfigFormComponent } from './components/config-form/config-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ItemsInfoComponent,
-    ItemFormComponent
+    ItemFormComponent,
+    ConfigFormComponent
   ],
   imports: [
     BrowserModule,

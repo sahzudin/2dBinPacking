@@ -1,20 +1,21 @@
+import { PackerConfig, PackerService } from "src/app/services/packer.service";
 import { Item } from "./Item";
 import { Sheet } from "./Sheet";
 
 export class Packer {
 
-  config = {
-    width: 400,
-    height: 400,
-    padding: 20
-  };
+  config : PackerConfig;
 
   itemsUsagePercent: number = 0;
   items: Item[]
   sheets: Sheet[] = [];
 
-  constructor(items: Item[]){
+  constructor(
+    private packerService: PackerService,
+    items: Item[]
+    ){
     this.items = items
+    this.packerService.config$.subscribe( config => this.config = config)
   }
 
   pack(){
