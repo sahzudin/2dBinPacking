@@ -21,6 +21,7 @@ export class Packer {
   pack(){
     this.items.map( x => {
       x.used = false
+      x.rotated = false
     })
 
     this.sheets = [];

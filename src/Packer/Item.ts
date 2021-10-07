@@ -14,12 +14,17 @@ export class Item{
   y?: number
   used: boolean = false
   sheet?: Sheet
+  rotated: boolean
 
   reset(){
     this.x = undefined
     this.y = undefined
     this.used = false
     this.sheet = undefined
+  }
+
+  getArea(){
+    return this.width * this.height
   }
 
 }

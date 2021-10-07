@@ -17,8 +17,12 @@ export class Sheet extends Container{
     this.padding = padding
   }
 
+  getArea(){
+    return this.width * this.height
+  }
+
   pack(item){
-    let isFittingSheet = this.findNode(this, item)
+    let isFittingSheet: Sheet = this.findNode(this, item)
 
     if(isFittingSheet){
       item.used = true;
@@ -30,12 +34,19 @@ export class Sheet extends Container{
 
   }
 
-  findNode(sheet: Sheet, item: Item){
+  findNode(sheet: Sheet, item: Item) : Sheet{
     //If sheet is used, check it's nodes recursively
     if(sheet.used){
       return this.findNode(sheet.right, item) || this.findNode(sheet.bottom, item)
     } else{
-      return sheet.width >= item.width && sheet.height >= item.height ? sheet: false;
+      //Check if fits by area, if yes try to match width and height with item width and height
+      if(sheet.getArea() >= item.getArea()){
+        //if not set item rotated to true, meaning we will rotate the item 90deg
+        if(sheet.width < item.width || sheet.height < item.height) item.rotated = true
+
+        return sheet;
+      }
+      return null;
     }
   }
 
@@ -43,15 +54,15 @@ export class Sheet extends Container{
     sheet.used = true;
     sheet.bottom =  new Sheet()
       sheet.bottom.x = sheet.x,
-      sheet.bottom.y = sheet.y + item.height + this.padding,
-      sheet.bottom.width = item.width,
-      sheet.bottom.height = sheet.height - item.height - this.padding,
+      sheet.bottom.y = item.rotated ? sheet.y + item.width + this.padding : sheet.y + item.height + this.padding,
+      sheet.bottom.width = item.rotated ? item.height : item.width,
+      sheet.bottom.height = item.rotated ? sheet.height - item.width - this.padding : sheet.height - item.height - this.padding,
       sheet.bottom.items = []
 
     sheet.right = new Sheet()
-      sheet.right.x = sheet.x + item.width + this.padding,
+      sheet.right.x = item.rotated ? sheet.x + item.height + this.padding : sheet.x + item.width + this.padding,
       sheet.right.y = sheet.y,
-      sheet.right.width = sheet.width - item.width - this.padding,
+      sheet.right.width = item.rotated ? sheet.width - item.height - this.padding : sheet.width - item.width - this.padding,
       sheet.right.height = sheet.height,
       sheet.right.items = []
 
