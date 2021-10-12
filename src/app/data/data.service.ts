@@ -12,16 +12,9 @@ export class DataService {
   constructor() { }
 
   addItem(item){
-    let newItems: Item[] = [];
-    for(let i = 1; i <= item.quantity; i++){
-      let x = new Item(item.width, item.height)
-      newItems.push(x);
-    }
-    this.items.getValue().map(x => {
-      x.reset();
-    })
+    let newItem = new Item(item.width, item.height)
 
-    this.items.next([...newItems, ...this.items.getValue()])
+    this.items.next([...this.items.getValue(), newItem])
   }
 
   removeItem(item){

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/data/data.service';
+import { Item } from 'src/Packer/Item';
 
 @Component({
   selector: 'app-item-form',

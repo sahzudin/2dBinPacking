@@ -1,4 +1,4 @@
-import { PackerConfig, PackerService } from "src/app/services/packer.service";
+import { Algorithm, PackerConfig, PackerService } from "src/app/services/packer.service";
 import { Item } from "./Item";
 import { Sheet } from "./Sheet";
 
@@ -19,14 +19,9 @@ export class Packer {
   }
 
   pack(){
-    this.items.map( x => {
-      x.used = false
-      x.rotated = false
-    })
+    this.preparePacker()
 
-    this.sheets = [];
-
-    this.items.sort( (a: Item, b:Item) => a.width - b.width).reverse()
+    this.applyConfig()
 
     let sheet = this.createSheetFromConfig();
     this.sheets.push(sheet)
@@ -87,5 +82,49 @@ export class Packer {
     }else{
       this.itemsUsagePercent = (unused/used) * 100
     }
+  }
+
+  resetItems() : void{
+    this.items.map( x => {
+      x.used = false
+      x.rotated = false
+    })
+  }
+
+  preparePacker(): void{
+    this.resetItems();
+    this.sheets = [];
+  }
+
+  applyConfig(): void {
+    this.applyAlgorithm();
+  }
+
+  applyAlgorithm(): void{
+    switch (this.config.algorithm) {
+      case Algorithm.MAX_WIDTH:
+        this.maxWidthAlgorithm()
+        break;
+      case Algorithm.MAX_AREA:
+        this.maxAreaAlgorithm()
+        break;
+      case Algorithm.LONGEST_SIDE:
+        this.longestSideAlgorithm();
+        break;
+      default:
+        this.maxWidthAlgorithm();
+    }
+  }
+
+  maxWidthAlgorithm(){
+    this.items.sort( (a: Item, b:Item) => a.width - b.width).reverse()
+  }
+
+  maxAreaAlgorithm(){
+    this.items.sort( (a: Item , b: Item) => a.getArea() - b.getArea()).reverse()
+  }
+
+  longestSideAlgorithm(){
+    this.items.sort( ( a: Item, b: Item) => a.getLongestSide() - b.getLongestSide()).reverse()
   }
 }

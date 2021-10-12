@@ -29,12 +29,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(){
+    this.packer = new Packer(this.packerService, [])
 
     this.ds.items.subscribe(res => {
       this.items = res
 
-      this.packer = new Packer(this.packerService ,res)
-      this.packer.pack();
+      this.packer.items = res;
     })
 
   }

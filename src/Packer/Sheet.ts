@@ -40,7 +40,7 @@ export class Sheet extends Container{
       return this.findNode(sheet.right, item) || this.findNode(sheet.bottom, item)
     } else{
       //Check if fits by area, if yes try to match width and height with item width and height
-      if(sheet.getArea() >= item.getArea()){
+      if((sheet.width >= item.width && sheet.height >= item.height) || (sheet.width >= item.height && sheet.height >= item.width)){
         //if not set item rotated to true, meaning we will rotate the item 90deg
         if(sheet.width < item.width || sheet.height < item.height) item.rotated = true
 

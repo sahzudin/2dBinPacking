@@ -27,4 +27,8 @@ export class Item{
     return this.width * this.height
   }
 
+  getLongestSide(){
+    return this.width >= this.height ? this.width : this.height
+  }
+
 }
