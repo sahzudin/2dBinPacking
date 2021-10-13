@@ -9,8 +9,12 @@ export class PackerService {
   defaultConfig: PackerConfig = {
     width: 400,
     height: 400,
+    depth: 400,
     padding: 20,
-    algorithm: Algorithm.MAX_WIDTH
+    algorithm: Algorithm.MAX_WIDTH,
+    limit: false,
+    pallete_count: 0,
+    item_depth: 10
   }
 
   config: BehaviorSubject<PackerConfig> = new BehaviorSubject(this.defaultConfig);
@@ -22,8 +26,12 @@ export class PackerService {
     let config: PackerConfig = {
       width: data.width,
       height: data.height,
+      depth: data.depth,
       padding: data.padding,
-      algorithm: Algorithm[String(data.algorithm)]
+      algorithm: Algorithm[String(data.algorithm)],
+      limit: data.limit,
+      pallete_count: data.pallete_count,
+      item_depth: data.item_depth
     }
 
     this.config.next(config)
@@ -34,8 +42,12 @@ export class PackerService {
 export interface PackerConfig{
   width: number,
   height: number,
+  depth: number,
   padding: number,
-  algorithm: Algorithm
+  algorithm: Algorithm,
+  limit: boolean,
+  pallete_count: number,
+  item_depth: number
 }
 
 export enum Algorithm{

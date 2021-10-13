@@ -5,10 +5,12 @@ import { Sheet } from "./Sheet";
 export class Packer {
 
   config : PackerConfig;
-
   itemsUsagePercent: number = 0;
   items: Item[]
-  sheets: Sheet[] = [];
+  sheets: Sheet[] = []
+  max_sheets_from_number_of_palletes: number
+  max_sheets_per_pallete: number
+  palletes: [ Sheet[] ] = [[]]
 
   constructor(
     private packerService: PackerService,
@@ -51,12 +53,29 @@ export class Packer {
       item.used = true
     }
 
+    this.placeSheetsIntoPalletes()
+
     this.sheets.forEach(sheet => {
       sheet.calculateEfficiency();
     })
     this.calculatePercentageUsed();
     console.log(this);
 
+  }
+
+  placeSheetsIntoPalletes(){
+    this.sheets.forEach((sheet: Sheet) => {
+      this.fitIntoPallete(sheet)
+    })
+  }
+
+  fitIntoPallete(sheet: Sheet){
+    let pallete = this.palletes.find( pallete => pallete.length < this.max_sheets_per_pallete);
+    if(pallete){
+      pallete.push(sheet)
+    }else{
+      this.palletes.push([sheet])
+    }
   }
 
   findFitting(sheet: Sheet, item: Item){
@@ -94,9 +113,11 @@ export class Packer {
   preparePacker(): void{
     this.resetItems();
     this.sheets = [];
+    this.palletes = [[]]
   }
 
   applyConfig(): void {
+    this.calculateMaxSheetsPerPallete()
     this.applyAlgorithm();
   }
 
@@ -119,6 +140,10 @@ export class Packer {
         console.info('Config algorithm: ',this.config.algorithm);
         this.maxWidthAlgorithm();
     }
+  }
+
+  calculateMaxSheetsPerPallete(){
+    this.max_sheets_per_pallete = Math.floor(this.config.depth / (this.config.item_depth + this.config.padding))
   }
 
   maxWidthAlgorithm(){
