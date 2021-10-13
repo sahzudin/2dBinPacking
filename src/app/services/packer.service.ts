@@ -18,7 +18,14 @@ export class PackerService {
 
   constructor() { }
 
-  updateConfig(config: PackerConfig){
+  updateConfig(data){
+    let config: PackerConfig = {
+      width: data.width,
+      height: data.height,
+      padding: data.padding,
+      algorithm: Algorithm[String(data.algorithm)]
+    }
+
     this.config.next(config)
   }
 

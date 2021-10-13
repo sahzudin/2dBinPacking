@@ -19,6 +19,16 @@
         <input type="number" formControlName="padding"/>
       </div>
 
+      <div class="form-group">
+        <label for="Height">Algorithm</label>
+        <select type="number" formControlName="algorithm">
+          <option value="MAX_WIDTH">Max width</option>
+          <option value="LONGEST_SIDE">Longest side</option>
+          <option value="MAX_AREA">Max area</option>
+        </select>
+      </div>
+
+
       <p-button label="Save" icon="pi pi-plus" styleClass="p-button-sm" (click)="applyConfiguration()"></p-button>
     </form>
 

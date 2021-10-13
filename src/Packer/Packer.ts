@@ -101,17 +101,22 @@ export class Packer {
   }
 
   applyAlgorithm(): void{
-    switch (this.config.algorithm) {
-      case Algorithm.MAX_WIDTH:
+    switch ((this.config.algorithm.toString())) {
+
+      case Algorithm.MAX_WIDTH.toString():
         this.maxWidthAlgorithm()
+        console.info('Max width algorithm chosen');
         break;
-      case Algorithm.MAX_AREA:
-        this.maxAreaAlgorithm()
-        break;
-      case Algorithm.LONGEST_SIDE:
-        this.longestSideAlgorithm();
-        break;
-      default:
+        case Algorithm.MAX_AREA.toString():
+          this.maxAreaAlgorithm()
+          console.info('Max area algorithm chosen');
+          break;
+          case Algorithm.LONGEST_SIDE.toString():
+            this.longestSideAlgorithm();
+            console.info('Longest side algorithm chosen');
+            break;
+        default:
+        console.info('Config algorithm: ',this.config.algorithm);
         this.maxWidthAlgorithm();
     }
   }
