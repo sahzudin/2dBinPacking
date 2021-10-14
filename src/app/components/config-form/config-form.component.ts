@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { LayoutStateService } from 'src/app/services/layout-state.service';
 import { Algorithm, PackerService } from 'src/app/services/packer.service';
 
 @Component({
@@ -14,10 +15,16 @@ export class ConfigFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private packerService: PackerService
+    private packerService: PackerService,
+    private layoutService: LayoutStateService
   ) { }
 
   ngOnInit(): void {
+
+    this.layoutService.configDialog$.subscribe( state => {
+      this.display = state;
+    })
+
     this.form = this.fb.group({
       width: [400],
       height: [400],
