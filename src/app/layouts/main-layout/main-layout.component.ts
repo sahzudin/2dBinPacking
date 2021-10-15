@@ -19,7 +19,9 @@ export class MainLayoutComponent implements OnInit {
     this.tooltipItems = [
       {
         icon: 'pi pi-plus',
-        tooltip: 'Add items',
+        tooltipOptions: {
+          tooltipLabel: 'Add items'
+        },
         command: () => this.layoutService.openItemFormDialog()
       }
     ]

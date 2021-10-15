@@ -1,0 +1,8 @@
+:host ::ng-deep{
+  .p-speeddial-direction-up {
+      &.speeddial-right {
+          right: 15px;
+          bottom: 15px;
+      }
+  }
+}

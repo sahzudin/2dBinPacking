@@ -19,4 +19,8 @@ export class HeaderComponent implements OnInit {
     this.layoutService.configDialog.next(true)
   }
 
+  pack(){
+    console.log('Packer called.');
+
+  }
 }

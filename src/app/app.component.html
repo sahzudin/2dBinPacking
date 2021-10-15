@@ -1,23 +1,9 @@
 <router-outlet></router-outlet>
 
 <app-items-dialog></app-items-dialog>
+<app-config-form></app-config-form>
 
 <div class="wrapper">
-
-  <div class="data-container">
-    <app-item-form></app-item-form>
-
-    <app-items-info [items]="items" [itemsUsagePercentage]="packer.itemsUsagePercent"></app-items-info>
-
-    <button (click)="pack()">Pack</button>
-    <button (click)="clear()">Clear</button>
-
-    <!-- <div class="buttons-container">
-      <button pButton type="button" label="Pack" class="p-button clear-button" (click)="pack()" *ngIf="items.length > 0"></button>
-      <button pButton type="button" label="Remove all" class="p-button-danger clear-button" (click)="clear()" *ngIf="items.length > 0"></button>
-    </div> -->
-
-  </div>
 
   <div class="visual-container">
     <div class="sheet" [ngStyle]="{'width.px': packer.config.width, 'height.px': packer.config.height}" *ngFor="let sheet of packer.sheets">
