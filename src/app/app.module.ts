@@ -10,21 +10,23 @@ import { ConfigFormComponent } from './components/config-form/config-form.compon
 import { PrimengModule } from './primeng/primeng.module';
 import { AppRoutingModule } from './app-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ItemsDialogComponent } from './components/dialogs/items-dialog/items-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ItemsInfoComponent,
     ItemFormComponent,
-    ConfigFormComponent
+    ConfigFormComponent,
+    ItemsDialogComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     InputTextModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     PrimengModule,
-    AppRoutingModule,
     FontAwesomeModule
   ],
   providers: [],

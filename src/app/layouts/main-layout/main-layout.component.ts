@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuItem } from 'primeng/api';
+import { LayoutStateService } from 'src/app/services/layout-state.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainLayoutComponent implements OnInit {
 
-  constructor() { }
+  tooltipItems: MenuItem[]
+
+  constructor(
+    private layoutService: LayoutStateService
+  ) { }
 
   ngOnInit(): void {
+    this.tooltipItems = [
+      {
+        icon: 'pi pi-plus',
+        tooltip: 'Add items',
+        command: () => this.layoutService.openItemFormDialog()
+      }
+    ]
   }
 
 }
