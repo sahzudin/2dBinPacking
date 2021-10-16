@@ -129,10 +129,5 @@
       }
     }
   },
-  "schematics": {
-    "@schematics/angular:component": {
-      "styleext": "scss"
-    }
-  },
   "defaultProject": "packing2d"
 }

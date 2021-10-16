@@ -1,7 +1,10 @@
+import { Injectable } from "@angular/core";
+import { DataService } from "src/app/data/data.service";
 import { Algorithm, PackerConfig, PackerService } from "src/app/services/packer.service";
 import { Item } from "./Item";
 import { Sheet } from "./Sheet";
 
+@Injectable({providedIn: 'root'})
 export class Packer {
 
   config : PackerConfig;
@@ -14,10 +17,13 @@ export class Packer {
 
   constructor(
     private packerService: PackerService,
-    items: Item[]
-    ){
-    this.items = items
+    private dataService: DataService
+  ){
     this.packerService.config$.subscribe( config => this.config = config)
+
+    this.dataService.items$.subscribe( items => {
+      this.items = items;
+    })
   }
 
   pack(){

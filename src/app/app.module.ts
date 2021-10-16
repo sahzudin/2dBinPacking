@@ -11,6 +11,8 @@ import { PrimengModule } from './primeng/primeng.module';
 import { AppRoutingModule } from './app-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ItemsDialogComponent } from './components/dialogs/items-dialog/items-dialog.component';
+import { PackerComponent } from './pages/packer/packer.component';
+import { PackerInfoComponent } from './pages/packer/packer-info/packer-info.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { ItemsDialogComponent } from './components/dialogs/items-dialog/items-di
     ItemsInfoComponent,
     ItemFormComponent,
     ConfigFormComponent,
-    ItemsDialogComponent
+    ItemsDialogComponent,
+    PackerComponent,
+    PackerInfoComponent
   ],
   imports: [
     BrowserModule,

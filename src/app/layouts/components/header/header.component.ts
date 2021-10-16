@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { DataService } from 'src/app/data/data.service';
 import { LayoutStateService } from 'src/app/services/layout-state.service';
+import { Packer } from 'src/Packer/Packer';
 
 @Component({
   selector: 'app-header',
@@ -8,11 +11,16 @@ import { LayoutStateService } from 'src/app/services/layout-state.service';
 })
 export class HeaderComponent implements OnInit {
 
+  itemCount$: Observable<number>
+
   constructor(
-    private layoutService: LayoutStateService
+    private layoutService: LayoutStateService,
+    private dataService: DataService,
+    private packer: Packer
   ) { }
 
   ngOnInit(): void {
+    this.itemCount$ = this.dataService.itemCount$;
   }
 
   openConfigDialog(){
@@ -20,7 +28,6 @@ export class HeaderComponent implements OnInit {
   }
 
   pack(){
-    console.log('Packer called.');
-
+    this.packer.pack()
   }
 }

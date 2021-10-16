@@ -13,37 +13,10 @@ import { PackerService } from './services/packer.service';
 })
 export class AppComponent implements OnInit {
 
-  form: FormGroup;
-
-  title = 'packing2d';
-
-  items: Item[]
-
-  packer: Packer;
-
-  constructor(
-    private fb: FormBuilder,
-    private ds: DataService,
-    private packerService: PackerService
-  ){
-  }
+  constructor(){}
 
   ngOnInit(){
-    this.packer = new Packer(this.packerService, [])
-
-    this.ds.items.subscribe(res => {
-      this.items = res
-
-      this.packer.items = res;
-    })
 
   }
 
-  pack(){
-    this.packer.pack();
-  }
-
-  clear(){
-    this.ds.removeAll();
-  }
 }
