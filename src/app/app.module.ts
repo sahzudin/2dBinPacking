@@ -13,6 +13,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ItemsDialogComponent } from './components/dialogs/items-dialog/items-dialog.component';
 import { PackerComponent } from './pages/packer/packer.component';
 import { PackerInfoComponent } from './pages/packer/packer-info/packer-info.component';
+import { PalletesComponent } from './pages/packer/palletes/palletes.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PackerInfoComponent } from './pages/packer/packer-info/packer-info.comp
     ConfigFormComponent,
     ItemsDialogComponent,
     PackerComponent,
-    PackerInfoComponent
+    PackerInfoComponent,
+    PalletesComponent
   ],
   imports: [
     BrowserModule,
