@@ -14,6 +14,7 @@ import { ItemsDialogComponent } from './components/dialogs/items-dialog/items-di
 import { PackerComponent } from './pages/packer/packer.component';
 import { PackerInfoComponent } from './pages/packer/packer-info/packer-info.component';
 import { PalletesComponent } from './pages/packer/palletes/palletes.component';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { PalletesComponent } from './pages/packer/palletes/palletes.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     PrimengModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    SwiperModule
   ],
   providers: [],
   bootstrap: [AppComponent]

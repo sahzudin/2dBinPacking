@@ -1,25 +1,56 @@
-:host{
+:host::ng-deep{
     display: flex;
-    max-width: 1220px;
+    max-width: 1000px;
     width: 100%;
     margin-top: 30px;
+    column-gap: 10px;
 
     .palletes-list{
+        background-color: white;
+        border-radius: 5px;
+        padding: 20px;
         flex: 1;
+
+        .list-item{
+          padding: 10px 20px;
+          margin: 0 -20px;
+          background: #fffbcc;
+          border-bottom: 5px solid #f5f4ff;
+          cursor: pointer;
+
+          &:hover{
+            background: #ffdb81;
+          }
+
+          &.active{
+            background: #ffdb81;
+          }
+        }
     }
 
     .pallete-sheets{
-        flex: 3;
+        background-color: white;
+        border-radius: 5px;
+        padding: 20px;
+        width: 70%;
+    }
+
+    .sheet-container{
+      display: flex;
+      justify-content: center;
+      padding: 40px;
     }
 }
 
-
+.no-results{
+  text-align: center;
+}
 
 .sheet{
     position: relative;
     outline: 1px solid black;
     margin-right: 10px;
-  
+
     .space-used{
       position: absolute;
       bottom: -30px;
@@ -29,36 +60,36 @@
       font-size: 1.5em;
       width: 100%;
       text-align: center;
-  
+
       &.high{
         color: green;
       }
-  
+
       &.low{
         color: red;
       }
     }
   }
-  
+
   .item{
     position: absolute;
     box-shadow: inset 0 0 5px black;
   }
-  
+
   .node{
     position: absolute;
     box-shadow: inset 0 0 5px rgba(255, 0, 0, 0.432);
     display: flex;
     justify-content: center;
     align-items: center;
-  
+
     .sheet-dimensions{
       color: red;
     }
-  
+
     &:hover{
       background-color: rgba(255, 0, 0, 0.432);
-  
+
       .sheet-dimensions{
         font-weight: 900;
         color: white;
