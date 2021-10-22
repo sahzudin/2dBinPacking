@@ -26,14 +26,14 @@ export class ConfigFormComponent implements OnInit {
     })
 
     this.form = this.fb.group({
-      width: [400],
-      height: [400],
-      depth: [400],
-      padding: [20],
+      width: [316],
+      height: [275],
+      depth: [112],
+      padding: [2],
       algorithm: [Algorithm.MAX_WIDTH],
       limit: [false],
       pallete_count: [0],
-      item_depth: [10]
+      item_depth: [15]
     })
   }
 

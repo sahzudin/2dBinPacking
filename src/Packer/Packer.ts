@@ -61,12 +61,15 @@ export class Packer {
 
     this.placeSheetsIntoPalletes()
 
+    this.palletes.forEach( pallete => {
+      pallete.sort( (a: Sheet, b:Sheet) => a.width - b.width)
+    })
+
     this.sheets.forEach(sheet => {
       sheet.calculateEfficiency();
     })
     this.calculatePercentageUsed();
-    console.log(this);
-
+    
   }
 
   placeSheetsIntoPalletes(){

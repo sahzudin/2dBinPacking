@@ -17,15 +17,24 @@ export class DataService {
 
   addItem(item){
     let newItem = new Item(item.width, item.height)
-
+    
+    //set item id
+    if(this.items.getValue().length > 0){
+      newItem.id = this.items.getValue().slice(-1)[0].id + 1;
+    }else{
+      newItem.id = 1;
+    }
+    
     this.items.next([...this.items.getValue(), newItem])
 
     this.itemCount.next(this.items.getValue().length)
   }
 
   removeItem(item){
-    let index = this.items.getValue().indexOf(item)
-    let newList = this.items.getValue().splice(index, 1)
+    let newList = this.items.getValue().filter( x => {
+      return item.id != x.id
+    })
+    
     this.items.next(newList)
     this.itemCount.next(this.items.getValue().length)
   }

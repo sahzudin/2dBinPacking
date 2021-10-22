@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { PackerConfig } from 'src/app/services/packer.service';
 import { Packer } from 'src/Packer/Packer';
 import { Sheet } from 'src/Packer/Sheet';
@@ -15,7 +15,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar]);
   templateUrl: './palletes.component.html',
   styleUrls: ['./palletes.component.scss']
 })
-export class PalletesComponent implements OnInit {
+export class PalletesComponent implements OnInit, OnChanges {
 
   @Input() palletes: [Sheet[]]
   @Input() config: PackerConfig
@@ -34,12 +34,23 @@ export class PalletesComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.palletes);
+  }
 
+  ngOnChanges(changes: SimpleChanges){
+    if(changes.palletes){
+      this.selectedPallete = null;
+      this.activeItem = null
+    }    
   }
 
   selectPallete(pallete: Sheet[], index){
     this.selectedPallete = pallete
     this.activeItem = index
+
+    console.log(this.selectPallete);
+    console.log(this.activeItem);
+    
+    
   }
 
 }

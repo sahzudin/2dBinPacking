@@ -1,11 +1,24 @@
 <div class="info-container">
   <div class="packer-items">
-    <h3>Items info</h3>
+    <div class="info">
+      <h3>Artikli</h3>
+  
+      <button pButton pRipple type="button" icon="pi pi-book" class="p-button-rounded p-button-text" (click)="openItemInfo()"></button>
+    </div>
+
   </div>
   <div class="config-info">
-    <h3>Config info</h3>
+    <div class="info">
+      <h3>Konfiguracija</h3>
+
+      <button pButton pRipple type="button" icon="pi pi-cog" class="p-button-rounded p-button-text" (click)="openConfigInfo()"></button>
+    </div>
   </div>
   <div class="usage-info">
-    <h3>Usage info</h3>
+    <div class="info">
+      <h3>Statistika</h3>
+      
+      <button pButton pRipple type="button" icon="pi pi-chart-line" class="p-button-rounded p-button-text" (click)="openConfigInfo()"></button>
+    </div>
   </div>
 </div>

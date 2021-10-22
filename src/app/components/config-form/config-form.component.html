@@ -1,46 +1,37 @@
-<p-dialog header="Configuration" [(visible)]="display">
+<p-dialog header="Konfiguracija" [(visible)]="display">
+  <p>Dimenzije su izražene u cm</p>
 
   <div class="config-container">
 
     <form [formGroup]="form">
 
       <div class="form-group">
-        <label for="Width">Width</label>
+        <label for="Width">Širina</label>
         <input type="text" formControlName="width"/>
       </div>
 
       <div class="form-group">
-        <label for="Width">Height</label>
+        <label for="Width">Visina</label>
         <input type="number" formControlName="height"/>
       </div>
 
       <div class="form-group">
-        <label for="Width">Depth</label>
+        <label for="Width">Dubina</label>
         <input type="number" formControlName="depth"/>
       </div>
-
+    
       <div class="form-group">
-        <label for="Width">Limit palletes</label>
-        <input type="checkbox" formControlName="limit"/>
-      </div>
-
-      <div class="form-group">
-        <label for="Width">Number of palletes</label>
-        <input type="number" formControlName="pallete_count"/>
-      </div>
-
-      <div class="form-group">
-        <label for="Width">Item depth</label>
+        <label for="Width">Dubina artikla</label>
         <input type="number" formControlName="item_depth"/>
       </div>
 
       <div class="form-group">
-        <label for="Height">Padding</label>
+        <label for="Height">Razmak</label>
         <input type="number" formControlName="padding"/>
       </div>
 
       <div class="form-group">
-        <label for="Height">Algorithm</label>
+        <label for="Height">Algoritam</label>
         <select type="number" formControlName="algorithm">
           <option value="MAX_WIDTH">Max width</option>
           <option value="LONGEST_SIDE">Longest side</option>
@@ -49,7 +40,7 @@
       </div>
 
 
-      <p-button label="Save" icon="pi pi-plus" styleClass="p-button-sm" (click)="applyConfiguration()"></p-button>
+      <p-button label="Sačuvaj" icon="pi pi-plus" styleClass="p-button-sm" (click)="applyConfiguration()"></p-button>
     </form>
 
   </div>
