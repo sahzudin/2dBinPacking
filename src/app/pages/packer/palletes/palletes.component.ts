@@ -47,6 +47,8 @@ export class PalletesComponent implements OnInit, OnChanges {
     this.selectedPallete = pallete
     this.activeItem = index
 
+    this.selectedPallete.sort( (a: Sheet, b: Sheet) => a.efficiency - b.efficiency).reverse()
+
     console.log(this.selectPallete);
     console.log(this.activeItem);
     
