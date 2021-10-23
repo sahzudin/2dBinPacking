@@ -79,7 +79,6 @@ export class Sheet extends Container{
     item.x = sheet.x
     item.y = sheet.y
     item.sheet = sheet
-
     this.items.push(item)
 
     return sheet;

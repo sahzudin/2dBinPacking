@@ -1,11 +1,21 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnChanges, SimpleChanges } from "@angular/core";
+import { Warrant } from "src/app/components/dialogs/importer-dialog/importer-dialog.component";
 import { DataService } from "src/app/services/data.service";
 import { Algorithm, PackerConfig, PackerService } from "src/app/services/packer.service";
 import { Item } from "./Item";
 import { Sheet } from "./Sheet";
+import {cloneDeep} from 'lodash';
+
 
 @Injectable({providedIn: 'root'})
-export class Packer {
+export class Packer implements OnChanges {
+
+  ngOnChanges(changes: SimpleChanges){
+
+    console.log(changes);
+
+
+  }
 
   //packer efficiency
   itemsPacked: number
@@ -14,7 +24,7 @@ export class Packer {
   itemsUsagePercent: number = 0;
 
   //algorithm
-  bruteForceWeight: number = 1000000
+  bruteForceWeight: number = 10000
 
   //config
   config : PackerConfig;
@@ -22,9 +32,10 @@ export class Packer {
   max_sheets_per_pallete: number
 
   //state
-  items: Item[]
+  warrant: Warrant
   sheets: Sheet[] = []
   palletes: [ Sheet[] ] = [[]]
+  bestUsedPalletes: [Sheet[]] = [[]]
 
 
   constructor(
@@ -34,7 +45,7 @@ export class Packer {
     this.packerService.config$.subscribe( config => this.config = config)
 
     this.dataService.warrant$.subscribe( warrant => {
-      this.items = warrant.items;
+      this.warrant = warrant;
     })
   }
 
@@ -51,26 +62,30 @@ export class Packer {
       //if algorithm is brute force then run the the packing 100 times,
       for (let index = 0; index < this.bruteForceWeight; index++) {
         this.bruteForceAlgorithm()
+        this.resetItems()
+        this.sheets = []
         this.packerRun()
       }
+
+      this.palletes == this.bestUsedPalletes
     }else{
       //if not brute furce run only once
       this.packerRun()
     }
 
     this.palletes.forEach( pallete => {
-      pallete.sort( (a: Sheet, b:Sheet) => a.efficiency - b.efficiency)
-    })
 
-    this.sheets.forEach(sheet => {
-      sheet.calculateEfficiency();
+      pallete.forEach( sheet => sheet.calculateEfficiency())
+
+      pallete.sort( (a: Sheet, b:Sheet) => a.efficiency - b.efficiency)
+
     })
-    this.calculatePercentageUsed();
 
   }
 
   packerRun(){
-    for( let item of this.items)  {
+    let items = cloneDeep(this.warrant.items)
+    for( let item of items)  {
       if(item.height > this.config.height || item.width > this.config.width){
         item.used = false
         continue
@@ -99,7 +114,11 @@ export class Packer {
       //If algorithm is brute force only place sheets into palletes if the count is less than previous best
       let oldBestCount = this.palletesSheetCount()
       if(this.sheets.length < oldBestCount || oldBestCount == 0){
+        this.palletes = [[]]
         this.placeSheetsIntoPalletes()
+        this.bestUsedPalletes = {...this.palletes}
+        console.log( 'Best used palletes' ,this.bestUsedPalletes);
+
       }
     }else{
       //If it's not bruce force just place the sheeets in palletes
@@ -140,25 +159,8 @@ export class Packer {
     return new Sheet(this.config.width, this.config.height, 0, 0, [], true, this.config.padding);
   }
 
-  calculatePercentageUsed(){
-    let used = 0;
-    let unused = 0;
-    this.items.forEach(item => {
-      if(item.used){
-        used += item.width * item.height
-      }else{
-        unused += item.width * item.height
-      }
-    })
-    if(unused == 0){
-      this.itemsUsagePercent = 100;
-    }else{
-      this.itemsUsagePercent = (unused/used) * 100
-    }
-  }
-
   resetItems() : void{
-    this.items.map( x => {
+    this.warrant.items.map( x => {
       x.used = false
       x.rotated = false
     })
@@ -204,21 +206,21 @@ export class Packer {
   }
 
   maxWidthAlgorithm(){
-    this.items.sort( (a: Item, b:Item) => a.width - b.width).reverse()
+    this.warrant.items.sort( (a: Item, b:Item) => a.width - b.width).reverse()
   }
 
   maxAreaAlgorithm(){
-    this.items.sort( (a: Item , b: Item) => a.getArea() - b.getArea()).reverse()
+    this.warrant.items.sort( (a: Item , b: Item) => a.getArea() - b.getArea()).reverse()
   }
 
   longestSideAlgorithm(){
-    this.items.sort( ( a: Item, b: Item) => a.getLongestSide() - b.getLongestSide()).reverse()
+    this.warrant.items.sort( ( a: Item, b: Item) => a.getLongestSide() - b.getLongestSide()).reverse()
   }
 
   bruteForceAlgorithm(){
-    for (let i = this.items.length - 1; i > 0; i--) {
+    for (let i = this.warrant.items.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [this.items[i], this.items[j]] = [this.items[j], this.items[i]];
+      [this.warrant.items[i], this.warrant.items[j]] = [this.warrant.items[j], this.warrant.items[i]];
     }
   }
 }

@@ -11,7 +11,7 @@ export class PackerService {
     height: 275,
     depth: 112,
     padding: 2,
-    algorithm: Algorithm.MAX_WIDTH,
+    algorithm: Algorithm.BRUTE_FORCE,
     limit: false,
     pallete_count: 0,
     item_depth: 15

@@ -20,7 +20,7 @@
             [style.left.px]="item.x"
             [style.top.px]="item.y"
             [ngStyle]="{'width.px': item.rotated ? item.height : item.width, 'height.px': item.rotated ? item.width : item.height}">
-            {{item.width +' x '+ item.height}}
+            {{item.width +' x '+ item.height}} {{item.rotated }}
           </div>
           </ng-container>
 
