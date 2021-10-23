@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DataService } from 'src/app/data/data.service';
+import { DataService } from 'src/app/services/data.service';
 import { LayoutStateService } from 'src/app/services/layout-state.service';
 import { Item } from 'src/Packer/Item';
 
@@ -15,7 +15,7 @@ export class ItemsInfoComponent implements OnInit {
 
   constructor(
     private ds: DataService,
-    private layoutService: LayoutStateService  
+    private layoutService: LayoutStateService
   ) { }
 
   ngOnInit(): void {
@@ -23,11 +23,11 @@ export class ItemsInfoComponent implements OnInit {
       this.display = res;
     })
 
-    this.ds.items$.subscribe(res => {
-      this.items = res
+    this.ds.warrant$.subscribe(res => {
+      this.items = res.items
 
       console.log(res);
-      
+
     })
   }
 

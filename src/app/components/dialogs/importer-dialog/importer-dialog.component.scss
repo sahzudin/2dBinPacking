@@ -1,0 +1,12 @@
+:host ::ng-deep{
+  .p-dialog{
+    width: 100%;
+    max-width: 750px;
+  }
+}
+
+
+th , td {
+  display: flex;
+  justify-content: center;
+}

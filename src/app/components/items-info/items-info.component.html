@@ -22,7 +22,10 @@
     </ng-template>
   </p-table>
 
-  <button pButton pRipple type="button" label="Ukloni sve" class="p-button-danger removeall" (click)="removeAll()" *ngIf="items.length > 0"></button>
+  <div class="actions-container">
+    <button pButton pRipple type="button" label="Ukloni sve" class="p-button-danger removeall" (click)="removeAll()" *ngIf="items.length > 0"></button>
+    <button pButton pRipple type="button" label="Sačuvaj nalog" class="p-button" (click)="removeAll()" *ngIf="items.length > 0" disabled></button>
+  </div>
 
 </div>
 

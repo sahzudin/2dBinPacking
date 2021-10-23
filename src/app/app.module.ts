@@ -15,6 +15,7 @@ import { PackerComponent } from './pages/packer/packer.component';
 import { PackerInfoComponent } from './pages/packer/packer-info/packer-info.component';
 import { PalletesComponent } from './pages/packer/palletes/palletes.component';
 import { SwiperModule } from 'swiper/angular';
+import { ImporterDialogComponent } from './components/dialogs/importer-dialog/importer-dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SwiperModule } from 'swiper/angular';
     ItemsDialogComponent,
     PackerComponent,
     PackerInfoComponent,
-    PalletesComponent
+    PalletesComponent,
+    ImporterDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -53,5 +53,6 @@ export interface PackerConfig{
 export enum Algorithm{
   MAX_WIDTH,
   LONGEST_SIDE,
-  MAX_AREA
+  MAX_AREA,
+  BRUTE_FORCE
 }

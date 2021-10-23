@@ -8,12 +8,15 @@ export class LayoutStateService {
 
   itemFormDialog: BehaviorSubject<boolean> = new BehaviorSubject(false);
   itemFormDialog$: Observable<boolean> = this.itemFormDialog.asObservable();
-  
+
   itemInfoDialog: BehaviorSubject<boolean> = new BehaviorSubject(false);
   itemInfoDialog$: Observable<boolean> = this.itemInfoDialog.asObservable();
-  
+
   configDialog: BehaviorSubject<boolean> = new BehaviorSubject(false);
   configDialog$: Observable<boolean> = this.configDialog.asObservable();
+
+  importerDialog: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  importerDialog$: Observable<boolean> = this.importerDialog.asObservable();
 
 
   constructor() { }

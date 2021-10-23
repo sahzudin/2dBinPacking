@@ -12,6 +12,7 @@
 
     <swiper [config]="swiperConfig" [navigation]="true" [pagination]="true" >
       <ng-template swiperSlide class="sheet-container" *ngFor="let sheet of selectedPallete">
+        <p class="efficiency">{{sheet.efficiency | number: '1.2-2'}}% iskorištenost</p>
 
         <div class="sheet" [ngStyle]="{'width.px': config.width, 'height.px': config.height}">
           <ng-container *ngFor="let item of sheet.items">

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DataService } from 'src/app/data/data.service';
+import { DataService } from 'src/app/services/data.service';
 import { LayoutStateService } from 'src/app/services/layout-state.service';
 import { Packer } from 'src/Packer/Packer';
 

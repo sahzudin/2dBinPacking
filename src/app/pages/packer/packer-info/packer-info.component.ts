@@ -27,4 +27,8 @@ export class PackerInfoComponent implements OnInit {
     this.layoutService.configDialog.next(true)
   }
 
+  openImporterDialog(){
+    this.layoutService.importerDialog.next(true)
+  }
+
 }

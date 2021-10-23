@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { DataService } from "src/app/data/data.service";
+import { DataService } from "src/app/services/data.service";
 import { Algorithm, PackerConfig, PackerService } from "src/app/services/packer.service";
 import { Item } from "./Item";
 import { Sheet } from "./Sheet";
@@ -7,13 +7,25 @@ import { Sheet } from "./Sheet";
 @Injectable({providedIn: 'root'})
 export class Packer {
 
-  config : PackerConfig;
+  //packer efficiency
+  itemsPacked: number
+  palletesUsed: number
+  sheetsUsed: number
   itemsUsagePercent: number = 0;
-  items: Item[]
-  sheets: Sheet[] = []
+
+  //algorithm
+  bruteForceWeight: number = 1000000
+
+  //config
+  config : PackerConfig;
   max_sheets_from_number_of_palletes: number
   max_sheets_per_pallete: number
+
+  //state
+  items: Item[]
+  sheets: Sheet[] = []
   palletes: [ Sheet[] ] = [[]]
+
 
   constructor(
     private packerService: PackerService,
@@ -21,8 +33,8 @@ export class Packer {
   ){
     this.packerService.config$.subscribe( config => this.config = config)
 
-    this.dataService.items$.subscribe( items => {
-      this.items = items;
+    this.dataService.warrant$.subscribe( warrant => {
+      this.items = warrant.items;
     })
   }
 
@@ -31,9 +43,33 @@ export class Packer {
 
     this.applyConfig()
 
+
     let sheet = this.createSheetFromConfig();
     this.sheets.push(sheet)
 
+    if(this.config.algorithm == Algorithm.BRUTE_FORCE){
+      //if algorithm is brute force then run the the packing 100 times,
+      for (let index = 0; index < this.bruteForceWeight; index++) {
+        this.bruteForceAlgorithm()
+        this.packerRun()
+      }
+    }else{
+      //if not brute furce run only once
+      this.packerRun()
+    }
+
+    this.palletes.forEach( pallete => {
+      pallete.sort( (a: Sheet, b:Sheet) => a.efficiency - b.efficiency)
+    })
+
+    this.sheets.forEach(sheet => {
+      sheet.calculateEfficiency();
+    })
+    this.calculatePercentageUsed();
+
+  }
+
+  packerRun(){
     for( let item of this.items)  {
       if(item.height > this.config.height || item.width > this.config.width){
         item.used = false
@@ -59,17 +95,26 @@ export class Packer {
       item.used = true
     }
 
-    this.placeSheetsIntoPalletes()
+    if(this.config.algorithm == Algorithm.BRUTE_FORCE){
+      //If algorithm is brute force only place sheets into palletes if the count is less than previous best
+      let oldBestCount = this.palletesSheetCount()
+      if(this.sheets.length < oldBestCount || oldBestCount == 0){
+        this.placeSheetsIntoPalletes()
+      }
+    }else{
+      //If it's not bruce force just place the sheeets in palletes
+      this.placeSheetsIntoPalletes()
+    }
+  }
+
+  palletesSheetCount(){
+    let count = 0;
 
     this.palletes.forEach( pallete => {
-      pallete.sort( (a: Sheet, b:Sheet) => a.width - b.width)
+      count += pallete.length
     })
 
-    this.sheets.forEach(sheet => {
-      sheet.calculateEfficiency();
-    })
-    this.calculatePercentageUsed();
-    
+    return count;
   }
 
   placeSheetsIntoPalletes(){
@@ -141,10 +186,13 @@ export class Packer {
           this.maxAreaAlgorithm()
           console.info('Max area algorithm chosen');
           break;
-          case Algorithm.LONGEST_SIDE.toString():
-            this.longestSideAlgorithm();
-            console.info('Longest side algorithm chosen');
-            break;
+        case Algorithm.LONGEST_SIDE.toString():
+          this.longestSideAlgorithm();
+          console.info('Longest side algorithm chosen');
+          break;
+        case Algorithm.BRUTE_FORCE.toString():
+          this.bruteForceAlgorithm();
+          console.info('Brute force algorithm chosen')
         default:
         console.info('Config algorithm: ',this.config.algorithm);
         this.maxWidthAlgorithm();
@@ -165,5 +213,12 @@ export class Packer {
 
   longestSideAlgorithm(){
     this.items.sort( ( a: Item, b: Item) => a.getLongestSide() - b.getLongestSide()).reverse()
+  }
+
+  bruteForceAlgorithm(){
+    for (let i = this.items.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.items[i], this.items[j]] = [this.items[j], this.items[i]];
+    }
   }
 }

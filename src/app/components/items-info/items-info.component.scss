@@ -19,6 +19,16 @@
   }
 }
 
+.actions-container{
+  display: flex;
+  justify-content: flex-end;
+
+  button{
+    margin-left: 10px;
+    margin-top: 0;
+  }
+}
+
 .info-container{
   display: flex;
   justify-content: space-between;

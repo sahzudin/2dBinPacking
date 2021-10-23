@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Item } from 'src/Packer/Item';
 import { Packer } from 'src/Packer/Packer';
 import { Sheet } from 'src/Packer/Sheet';
-import { DataService } from './data/data.service';
+import { DataService } from './services/data.service';
 import { PackerService } from './services/packer.service';
 
 @Component({
