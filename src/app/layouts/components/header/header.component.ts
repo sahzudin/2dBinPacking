@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private layoutService: LayoutStateService,
     private dataService: DataService,
-    private packer: Packer
+    public packer: Packer
   ) { }
 
   ngOnInit(): void {

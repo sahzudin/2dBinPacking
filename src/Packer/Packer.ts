@@ -5,17 +5,11 @@ import { Algorithm, PackerConfig, PackerService } from "src/app/services/packer.
 import { Item } from "./Item";
 import { Sheet } from "./Sheet";
 import {cloneDeep} from 'lodash';
+import { BehaviorSubject, Observable } from "rxjs";
 
 
 @Injectable({providedIn: 'root'})
-export class Packer implements OnChanges {
-
-  ngOnChanges(changes: SimpleChanges){
-
-    console.log(changes);
-
-
-  }
+export class Packer {
 
   //packer efficiency
   itemsPacked: number
@@ -24,7 +18,7 @@ export class Packer implements OnChanges {
   itemsUsagePercent: number = 0;
 
   //algorithm
-  bruteForceWeight: number = 10000
+  bruteForceWeight: number = 100000
 
   //config
   config : PackerConfig;
@@ -36,6 +30,7 @@ export class Packer implements OnChanges {
   sheets: Sheet[] = []
   palletes: [ Sheet[] ] = [[]]
   bestUsedPalletes: [Sheet[]] = [[]]
+  packing: boolean = false
 
 
   constructor(
@@ -50,6 +45,7 @@ export class Packer implements OnChanges {
   }
 
   pack(){
+    this.packing = true
     this.preparePacker()
 
     this.applyConfig()
@@ -80,6 +76,8 @@ export class Packer implements OnChanges {
       pallete.sort( (a: Sheet, b:Sheet) => a.efficiency - b.efficiency)
 
     })
+
+    this.packing = false
 
   }
 

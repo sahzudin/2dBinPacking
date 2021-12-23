@@ -1,5 +1,21 @@
 <app-header></app-header>
 
-<router-outlet></router-outlet>
+<div class="main-layout-container">
+  <div class="sidebar">
+
+    <div class="sidebar-navigation">
+      <ul class="navigation-list">
+        <li class="list-item" *ngFor="let item of sidebarMenuItems">
+          <span>{{item.label}}</span>
+          <i class="{{item.icon}}"></i>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
 
 <p-speedDial [model]="tooltipItems" class="bottom-right" className="speeddial-right" direction="up"></p-speedDial>

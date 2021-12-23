@@ -16,6 +16,7 @@ import { PackerInfoComponent } from './pages/packer/packer-info/packer-info.comp
 import { PalletesComponent } from './pages/packer/palletes/palletes.component';
 import { SwiperModule } from 'swiper/angular';
 import { ImporterDialogComponent } from './components/dialogs/importer-dialog/importer-dialog.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,10 @@ import { ImporterDialogComponent } from './components/dialogs/importer-dialog/im
     BrowserAnimationsModule,
     PrimengModule,
     FontAwesomeModule,
-    SwiperModule
+    SwiperModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

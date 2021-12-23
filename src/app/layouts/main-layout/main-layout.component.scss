@@ -6,3 +6,21 @@
       }
   }
 }
+
+$header-height: 70;
+
+.sidebar, .content{
+  padding: 20px;
+}
+
+.main-layout-container{
+  display: flex;
+}
+
+.sidebar{
+  width: 250px;
+  background: white;
+  height: calc(100vh - 70px);
+  z-index: -1;
+}
+

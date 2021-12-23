@@ -5,9 +5,11 @@
 
 @import 'swiper/css/bundle';
 
+@import "variables.scss";
+
 body{
   margin: 0;
-  background: #f5f4ff;
+  background: $primary-background;
 
   *{
     box-sizing: border-box;

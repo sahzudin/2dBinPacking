@@ -1,0 +1,25 @@
+<div class="login-container">
+  <div class="login-form">
+    <div class="logo">
+      <img src="/assets/images/logo.png" alt="logo">
+    </div>
+
+    <div class="form" [formGroup]="loginForm">
+      <div class="input-container">
+        <label for="email">Username</label>
+        <input type="text" formControlName="username">
+        <div class="error" *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].invalid">Username is required</div>
+      </div>
+      <div class="input-container">
+        <label for="password">Password</label>
+        <input type="password" formControlName="password">
+        <div class="error" *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">Password is required</div>
+      </div>
+
+      <div class="actions">
+        <button pButton pRipple type="button" label="Forgot password?" class="p-button-text"></button>
+        <p-button label="Login" (click)="login()" [disabled]="loginForm.invalid"></p-button>
+      </div>
+    </div>
+  </div>
+</div>

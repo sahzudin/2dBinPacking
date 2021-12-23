@@ -1,0 +1,39 @@
+.login-container{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+
+  .login-form{
+    display: flex;
+    padding: 40px;
+    border-radius: 20px;
+    background-color: white;
+    column-gap: 40px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+
+    img{
+      width: 150px;
+    }
+  }
+
+  .input-container{
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+
+    input{
+      border: 1px solid lightgray;
+      border-radius: 5px;
+      background-color: white;
+      padding: 10px;
+      margin-top: 5px;
+    }
+  }
+}
