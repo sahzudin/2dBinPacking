@@ -12,9 +12,9 @@ export class MainLayoutComponent implements OnInit {
 
   tooltipItems: MenuItem[]
   sidebarMenuItems: SidebarMenuItem[] = [
-    {label: 'Lista naloga', icon: 'pi pi-list'},
-    {label: 'Novi nalog', icon: 'pi pi-plus'},
-    {label: 'Postavke', icon: 'pi pi-cog'}
+    {label: 'Lista naloga', icon: 'pi pi-list', route: 'warrants'},
+    {label: 'Novi nalog', icon: 'pi pi-plus', route: 'warrants/new'},
+    {label: 'Postavke', icon: 'pi pi-cog', route: 'settings'}
   ]
 
 

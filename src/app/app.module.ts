@@ -17,6 +17,9 @@ import { PalletesComponent } from './pages/packer/palletes/palletes.component';
 import { SwiperModule } from 'swiper/angular';
 import { ImporterDialogComponent } from './components/dialogs/importer-dialog/importer-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
+import { WarrantsComponent } from './pages/warrants/warrants.component';
+import { NewWarrantComponent } from './pages/new-warrant/new-warrant.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { HttpClientModule } from '@angular/common/http';
     PackerComponent,
     PackerInfoComponent,
     PalletesComponent,
-    ImporterDialogComponent
+    ImporterDialogComponent,
+    WarrantsComponent,
+    NewWarrantComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

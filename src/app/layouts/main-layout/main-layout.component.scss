@@ -21,6 +21,27 @@ $header-height: 70;
   width: 250px;
   background: white;
   height: calc(100vh - 70px);
-  z-index: -1;
 }
 
+.content{
+  width: calc(100% - 250px);
+}
+
+.navigation-list{
+  list-style: none;
+  padding: 0;
+  margin: -10px -20px;
+}
+
+.list-item{
+  display: flex;
+  padding: 20px;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #f5f4ff;
+  cursor: pointer;
+
+  &:hover{
+    background: #efefef;
+  }
+}

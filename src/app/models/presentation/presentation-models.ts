@@ -2,5 +2,6 @@
 
 export interface SidebarMenuItem{
   label: string,
-  icon: string
+  icon: string,
+  route: string
 }
