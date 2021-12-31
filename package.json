@@ -24,7 +24,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "lodash": "^4.17.21",
-    "primeicons": "^4.1.0",
+    "primeicons": "^5.0.0",
     "primeng": "^12.2.1",
     "rxjs": "~6.6.0",
     "swiper": "^7.0.9",

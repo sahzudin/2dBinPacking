@@ -1,7 +1,10 @@
-:host{
+.content-container{
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+p-button{
+  margin-top: 20px;
 }
 
 .wrapper{

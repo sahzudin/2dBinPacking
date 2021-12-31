@@ -15,3 +15,8 @@ body{
     box-sizing: border-box;
   }
 }
+
+.content-container{
+  display: flex;
+  flex-direction: column;
+}

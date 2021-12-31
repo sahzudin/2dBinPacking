@@ -1,0 +1,30 @@
+form{
+    display: flex;
+    align-items: flex-end;
+    grid-column-gap: 20px;
+    column-gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    
+
+    input{
+        padding: 5px 10px;
+        border: 1px solid lightgray;
+        border-radius: 5px;
+        width: fit-content;
+    }
+}
+
+.items-container{
+    display: flex;
+    flex-direction: column;
+    
+    p-button{
+        margin-left: auto;
+        margin-top: 20px;
+    }
+}

@@ -12,14 +12,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ItemsDialogComponent } from './components/dialogs/items-dialog/items-dialog.component';
 import { PackerComponent } from './pages/packer/packer.component';
-import { PackerInfoComponent } from './pages/packer/packer-info/packer-info.component';
 import { PalletesComponent } from './pages/packer/palletes/palletes.component';
 import { SwiperModule } from 'swiper/angular';
 import { ImporterDialogComponent } from './components/dialogs/importer-dialog/importer-dialog.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { WarrantsComponent } from './pages/warrants/warrants.component';
 import { NewWarrantComponent } from './pages/new-warrant/new-warrant.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { TokenInterceptorService } from './config/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,6 @@ import { SettingsComponent } from './pages/settings/settings.component';
     ConfigFormComponent,
     ItemsDialogComponent,
     PackerComponent,
-    PackerInfoComponent,
     PalletesComponent,
     ImporterDialogComponent,
     WarrantsComponent,
@@ -49,7 +48,9 @@ import { SettingsComponent } from './pages/settings/settings.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

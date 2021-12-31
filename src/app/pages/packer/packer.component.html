@@ -1,7 +1,16 @@
-<app-packer-info [packer]="packer"></app-packer-info>
+<div class="content-container">
+    <h3>Trenutni nalog</h3>
 
-<app-palletes [palletes]="packer.palletes" [config]="packer.config" [itemsCount]="packer.warrant.items.length"></app-palletes>
+    <div class="packer-actions">
+        <span>Broj elemenata u nalogu {{itemCount$ | async}}</span>
+    </div>
 
-<div class="wrapper">
+    <p-button (click)="pack()" label="Pakuj" icon="pi pi-box" class="pack-button"></p-button>
 
+    <app-palletes [palletes]="packer.palletes" [config]="packer.config" [itemsCount]="packer.warrant.items.length"></app-palletes>
+    
+    <div class="wrapper">
+    
+    </div>
 </div>
+

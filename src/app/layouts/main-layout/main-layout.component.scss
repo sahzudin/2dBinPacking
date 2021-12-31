@@ -41,6 +41,14 @@ $header-height: 70;
   border-bottom: 2px solid #f5f4ff;
   cursor: pointer;
 
+  &.active{
+    background: #efefef;
+  }
+
+  i{
+    font-size: 1.3rem;
+  }
+
   &:hover{
     background: #efefef;
   }
