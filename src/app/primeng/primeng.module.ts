@@ -7,6 +7,8 @@ import {SpeedDialModule} from 'primeng/speeddial';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {InputTextModule} from 'primeng/inputtext';
 import {BadgeModule} from 'primeng/badge';
+import {ProgressBarModule} from 'primeng/progressbar';
+import {ToastModule} from 'primeng/toast';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import {BadgeModule} from 'primeng/badge';
     SpeedDialModule,
     ProgressSpinnerModule,
     InputTextModule,
-    BadgeModule
+    BadgeModule,
+    ProgressBarModule,
+    ToastModule
   ],
   exports: [
     TableModule,
@@ -28,7 +32,9 @@ import {BadgeModule} from 'primeng/badge';
     SpeedDialModule,
     ProgressSpinnerModule,
     InputTextModule,
-    BadgeModule
+    BadgeModule,
+    ProgressBarModule,
+    ToastModule
   ]
 })
 export class PrimengModule { }

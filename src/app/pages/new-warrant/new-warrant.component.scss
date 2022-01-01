@@ -9,9 +9,9 @@ form{
 .form-group{
     display: flex;
     flex-direction: column;
-    
 
-    input{
+
+    input, select{
         padding: 5px 10px;
         border: 1px solid lightgray;
         border-radius: 5px;
@@ -22,7 +22,7 @@ form{
 .items-container{
     display: flex;
     flex-direction: column;
-    
+
     p-button{
         margin-left: auto;
         margin-top: 20px;

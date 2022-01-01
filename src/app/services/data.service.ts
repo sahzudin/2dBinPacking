@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Item } from 'src/Packer/Item';
 import { Warrant } from '../components/dialogs/importer-dialog/importer-dialog.component';
+import { NotificationsService } from './notifications.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,9 @@ export class DataService {
   itemCount: BehaviorSubject<number> = new BehaviorSubject(0);
   itemCount$: Observable<number> = this.itemCount.asObservable();
 
-  constructor() { }
+  constructor(
+    private notificationService: NotificationsService
+  ) { }
 
   addItem(item){
     let newItem = new Item(item.width, item.height)
@@ -62,5 +65,6 @@ export class DataService {
   loadWarrant(warrant: Warrant){
     this.warrant.next(warrant)
     this.itemCount.next(warrant.items.length)
+    this.notificationService.showSuccess("Nalog učitan")
   }
 }

@@ -1,16 +1,19 @@
 <div class="content-container">
-    <h3>Trenutni nalog</h3>
+    <div class="heading">
+      <h3> Trenutni nalog </h3>
+      <button pButton pRipple type="button" icon="pi pi-search" class="p-button-rounded p-button-text" *ngIf="(itemCount$ | async) > 0" (click)="openDetails()"></button>
+    </div>
 
     <div class="packer-actions">
         <span>Broj elemenata u nalogu {{itemCount$ | async}}</span>
     </div>
 
-    <p-button (click)="pack()" label="Pakuj" icon="pi pi-box" class="pack-button"></p-button>
+    <p-button (click)="pack()" label="Pakuj" icon="pi pi-box" class="pack-button" *ngIf="(itemCount$ | async) > 0"></p-button>
 
     <app-palletes [palletes]="packer.palletes" [config]="packer.config" [itemsCount]="packer.warrant.items.length"></app-palletes>
-    
+
     <div class="wrapper">
-    
+
     </div>
 </div>
 

@@ -5,13 +5,26 @@
           <label for="Width">Širina</label>
           <input type="number" formControlName="width"/>
         </div>
-      
+
         <div class="form-group">
           <label for="Height">Visina</label>
           <input type="number" formControlName="height"/>
         </div>
-      
+
         <p-button label="Dodaj" icon="pi pi-plus" styleClass="p-button-sm" (click)="add()"></p-button>
+        <p-button label="Sačuvaj uzorak" icon="pi pi-save" styleClass="p-button-sm" (click)="saveItem()"></p-button>
+
+        <ng-container *ngIf=" savedItems$ | async as savedItems">
+          <div class="form-group">
+            <label for="savedItems">Sačuvani elementi ({{savedItems.length}})</label>
+            <select name="savedItems" id="savedItems" formControlName="savedItem">
+              <option [ngValue]="item" *ngFor="let item of savedItems">{{'Širina: ' + item.width + ' Visina: ' + item.height}}</option>
+            </select>
+          </div>
+
+          <p-button label="Dodaj" icon="pi pi-plus" styleClass="p-button-sm" (click)="addSavedItem()"></p-button>
+        </ng-container>
+
     </form>
 
     <div class="items-container">

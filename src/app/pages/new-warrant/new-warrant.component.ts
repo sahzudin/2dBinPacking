@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { Warrant } from 'src/app/components/dialogs/importer-dialog/importer-dialog.component';
-import { CreateWarrantRequest } from 'src/app/requestModels/CreateWarrantRequest';
+import { CreateItemRequest, CreateWarrantRequest } from 'src/app/requestModels/CreateWarrantRequest';
 import { ApiService } from 'src/app/services/api.service';
 import { DataService } from 'src/app/services/data.service';
 import { LayoutStateService } from 'src/app/services/layout-state.service';
@@ -12,10 +13,11 @@ import { LayoutStateService } from 'src/app/services/layout-state.service';
   styleUrls: ['./new-warrant.component.scss']
 })
 export class NewWarrantComponent implements OnInit {
-  
+
   form: FormGroup;
 
   warrant: Warrant;
+  savedItems$: Observable<any>;
 
   constructor(
     private fb: FormBuilder,
@@ -29,15 +31,27 @@ export class NewWarrantComponent implements OnInit {
       width: [100, [Validators.required]],
       height: [100, [Validators.required]],
       quantity: [1, [Validators.required]],
+      savedItem: [{}]
     })
 
     this.ds.warrant$.subscribe(res => {
       this.warrant = res;
     })
+
+    this.savedItems$ = this.apiService.getItems();
+    this.savedItems$.subscribe(res => {
+      console.log(res);
+
+    })
   }
 
   add(){
     this.ds.addItem(this.form.value)
+  }
+
+  addSavedItem(){
+    let item = this.form.controls['savedItem'].value
+    this.ds.addItem(item)
   }
 
   remove(item){
@@ -52,5 +66,14 @@ export class NewWarrantComponent implements OnInit {
 
     this.apiService.createWarrant(request)
   }
-  
+
+  saveItem(){
+    let request: CreateItemRequest = {
+      width: this.form.controls['width'].value,
+      height: this.form.controls['height'].value
+    }
+
+    this.apiService.createItem(request)
+  }
+
 }

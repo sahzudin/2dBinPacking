@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { SidebarMenuItem } from 'src/app/models/presentation/presentation-models';
 import { DataService } from 'src/app/services/data.service';
 import { LayoutStateService } from 'src/app/services/layout-state.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 import { Packer } from 'src/Packer/Packer';
 
 @Component({
@@ -13,6 +14,7 @@ import { Packer } from 'src/Packer/Packer';
 })
 export class MainLayoutComponent implements OnInit {
 
+  progressBar$: Observable<boolean>
   itemCount$: Observable<any>;
   tooltipItems: MenuItem[]
   sidebarMenuItems: SidebarMenuItem[] = [
@@ -24,10 +26,12 @@ export class MainLayoutComponent implements OnInit {
   constructor(
     private layoutService: LayoutStateService,
     private dataService: DataService,
-    public packer: Packer
+    public packer: Packer,
+    private notificationService: NotificationsService
   ) { }
 
   ngOnInit(): void {
+    this.progressBar$ = this.notificationService.progressBar$;
     this.tooltipItems = [
       {
         icon: 'pi pi-plus',
@@ -37,7 +41,7 @@ export class MainLayoutComponent implements OnInit {
         command: () => this.layoutService.openItemFormDialog()
       }
     ]
-    
+
     this.itemCount$ = this.dataService.itemCount$;
   }
 

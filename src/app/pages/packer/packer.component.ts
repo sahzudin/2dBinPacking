@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
+import { LayoutStateService } from 'src/app/services/layout-state.service';
 import { Packer } from 'src/Packer/Packer';
 
 @Component({
@@ -15,7 +16,8 @@ export class PackerComponent implements OnInit {
 
   constructor(
     private packerClass: Packer,
-    private ds: DataService
+    private ds: DataService,
+    private layoutService: LayoutStateService
   ) { }
 
   ngOnInit(): void {
@@ -26,6 +28,10 @@ export class PackerComponent implements OnInit {
 
   pack(){
     this.packer.pack();
+  }
+
+  openDetails(){
+    this.layoutService.openItemInfoDialog();
   }
 
 }

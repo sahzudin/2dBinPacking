@@ -20,6 +20,7 @@ import { WarrantsComponent } from './pages/warrants/warrants.component';
 import { NewWarrantComponent } from './pages/new-warrant/new-warrant.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { TokenInterceptorService } from './config/token-interceptor.service';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { TokenInterceptorService } from './config/token-interceptor.service';
     HttpClientModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},
+    MessageService
   ],
   bootstrap: [AppComponent]
 })
