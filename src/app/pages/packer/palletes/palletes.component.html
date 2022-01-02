@@ -20,7 +20,7 @@
             [style.left.px]="item.x"
             [style.top.px]="item.y"
             [ngStyle]="{'width.px': item.rotated ? item.height : item.width, 'height.px': item.rotated ? item.width : item.height}">
-            {{item.width +' x '+ item.height}} {{item.rotated }}
+            {{item.width +' x '+ item.height}}
           </div>
           </ng-container>
 
@@ -29,7 +29,7 @@
             [style.left.px]="sheet.x"
             [style.top.px]="sheet.y"
             [ngStyle]="{'width.px': sheet.width, 'height.px': sheet.height}">
-            <span class="sheet-dimensions">{{sheet.width + ' x ' + sheet.height}}</span>
+            <span class="sheet-dimensions"></span>
             </div>
           </ng-container>
         </div>

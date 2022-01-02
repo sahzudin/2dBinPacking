@@ -1,1 +1,60 @@
-<p>settings works!</p>
+<div class="content-container">
+
+  <div class="row">
+    <div class="col">
+      <h3>Paleta</h3>
+
+      <form [formGroup]="form">
+
+        <div class="form-group">
+          <label for="Width">Širina</label>
+          <input type="number" formControlName="width"/>
+        </div>
+
+        <div class="form-group">
+          <label for="Height">Visina</label>
+          <input type="number" formControlName="height"/>
+        </div>
+
+        <div class="form-group">
+          <label for="Height">Dubina</label>
+          <input type="number" formControlName="depth"/>
+        </div>
+
+        <div class="form-group">
+          <label for="Height">Razmak</label>
+          <input type="number" formControlName="padding"/>
+        </div>
+
+        <div class="form-group">
+          <label for="Height">Dubina elementa</label>
+          <input type="number" formControlName="item_depth"/>
+        </div>
+
+        <div class="actions">
+          <p-button label="Primjeni" icon="pi pi-plus" styleClass="p-button-sm" (click)="applyChanges()"></p-button>
+          <p-button label="Sačuvaj paletu" icon="pi pi-save" styleClass="p-button-sm" (click)="savePallete()"></p-button>
+        </div>
+
+        <ng-container *ngIf=" palletes$ | async as savedPalletes">
+          <div class="form-group">
+            <label for="savedItems">Sačuvane palete ({{savedPalletes.length}})</label>
+            <select name="savedItems" id="savedItems" formControlName="savedPallete">
+              <option [ngValue]="item" *ngFor="let item of savedPalletes">{{'Širina: ' + item?.width + ' Visina: ' + item?.height + ' Dubina: ' + item?.depth}}</option>
+            </select>
+          </div>
+
+          <p-button label="Primjeni" icon="pi pi-plus" styleClass="p-button-sm" (click)="applySaved()"></p-button>
+        </ng-container>
+
+      </form>
+    </div>
+
+    <div class="col">
+      <h3></h3>
+    </div>
+  </div>
+
+
+
+</div>

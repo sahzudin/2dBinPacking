@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Packer } from 'src/Packer/Packer';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class NotificationsService {
 
   constructor(
     private messageService: MessageService
-  ) { }
+  ) {}
 
   toggleProgress(){
     this.progressBar.next(!this.progressBar.value)

@@ -1,4 +1,4 @@
-<p-progressBar mode="indeterminate" [style]="{'height': '6px'}" *ngIf="progressBar$ | async"></p-progressBar>
+<p-progressBar mode="indeterminate" [style]="{'height': '6px'}" *ngIf="(progressBar$ | async) || isPacking "></p-progressBar>
 
 <p-toast></p-toast>
 

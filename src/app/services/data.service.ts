@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Item } from 'src/Packer/Item';
+import { Packer } from 'src/Packer/Packer';
 import { Warrant } from '../components/dialogs/importer-dialog/importer-dialog.component';
 import { NotificationsService } from './notifications.service';
 

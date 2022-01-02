@@ -89,4 +89,9 @@ export class AuthService {
       }
     )
   }
+
+  public logout(){
+    this.removeToken()
+    this.router.navigate(['/']);
+  }
 }

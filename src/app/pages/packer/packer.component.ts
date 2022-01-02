@@ -21,6 +21,8 @@ export class PackerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.packerClass.reset()
+
     this.packer = this.packerClass
 
     this.itemCount$ = this.ds.itemCount$;

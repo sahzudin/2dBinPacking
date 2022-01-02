@@ -30,7 +30,8 @@ export class Packer {
   sheets: Sheet[] = []
   palletes: [ Sheet[] ] = [[]]
   bestUsedPalletes: [Sheet[]] = [[]]
-  packing: boolean = false
+  packing: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  packing$: Observable<boolean> = this.packing.asObservable();
 
 
   constructor(
@@ -45,39 +46,44 @@ export class Packer {
   }
 
   pack(){
-    this.packing = true
-    this.preparePacker()
+    this.packing.next(true)
 
-    this.applyConfig()
+    setTimeout(() => {
+      this.preparePacker()
+
+      this.applyConfig()
 
 
-    let sheet = this.createSheetFromConfig();
-    this.sheets.push(sheet)
+      let sheet = this.createSheetFromConfig();
+      this.sheets.push(sheet)
 
-    if(this.config.algorithm == Algorithm.BRUTE_FORCE){
-      //if algorithm is brute force then run the the packing 100 times,
-      for (let index = 0; index < this.bruteForceWeight; index++) {
-        this.bruteForceAlgorithm()
-        this.resetItems()
-        this.sheets = []
+      if(this.config.algorithm == Algorithm.BRUTE_FORCE){
+        //if algorithm is brute force then run the the packing 100 times,
+        for (let index = 0; index < this.bruteForceWeight; index++) {
+          this.bruteForceAlgorithm()
+          this.resetItems()
+          this.sheets = []
+          this.packerRun()
+        }
+
+        this.palletes == this.bestUsedPalletes
+      }else{
+        //if not brute furce run only once
         this.packerRun()
       }
 
-      this.palletes == this.bestUsedPalletes
-    }else{
-      //if not brute furce run only once
-      this.packerRun()
-    }
+      this.palletes.forEach( pallete => {
 
-    this.palletes.forEach( pallete => {
+        pallete.forEach( sheet => sheet.calculateEfficiency())
 
-      pallete.forEach( sheet => sheet.calculateEfficiency())
+        pallete.sort( (a: Sheet, b:Sheet) => a.efficiency - b.efficiency)
 
-      pallete.sort( (a: Sheet, b:Sheet) => a.efficiency - b.efficiency)
+      })
 
-    })
+      this.packing.next(false)
+    }, 250)
 
-    this.packing = false
+
 
   }
 
@@ -220,5 +226,10 @@ export class Packer {
       const j = Math.floor(Math.random() * (i + 1));
       [this.warrant.items[i], this.warrant.items[j]] = [this.warrant.items[j], this.warrant.items[i]];
     }
+  }
+
+  reset(){
+    this.resetItems();
+    this.palletes = [[]]
   }
 }

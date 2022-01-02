@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { SidebarMenuItem } from 'src/app/models/presentation/presentation-models';
@@ -12,9 +12,11 @@ import { Packer } from 'src/Packer/Packer';
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.scss']
 })
-export class MainLayoutComponent implements OnInit {
+export class MainLayoutComponent implements OnInit, AfterViewChecked  {
 
   progressBar$: Observable<boolean>
+  isPacking: boolean;
+
   itemCount$: Observable<any>;
   tooltipItems: MenuItem[]
   sidebarMenuItems: SidebarMenuItem[] = [
@@ -27,11 +29,23 @@ export class MainLayoutComponent implements OnInit {
     private layoutService: LayoutStateService,
     private dataService: DataService,
     public packer: Packer,
-    private notificationService: NotificationsService
+    private notificationService: NotificationsService,
+    private cdRef: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.progressBar$ = this.notificationService.progressBar$;
+
+    this.progressBar$.subscribe(res => {
+      console.log(res);
+
+      this.isPacking = res;
+    })
+
+    this.packer.packing.subscribe(isPacking => {
+      this.notificationService.progressBar.next(isPacking)
+    })
+
     this.tooltipItems = [
       {
         icon: 'pi pi-plus',
@@ -43,6 +57,10 @@ export class MainLayoutComponent implements OnInit {
     ]
 
     this.itemCount$ = this.dataService.itemCount$;
+  }
+
+  ngAfterViewChecked(){
+    this.cdRef.detectChanges();
   }
 
   openConfigDialog(){

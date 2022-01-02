@@ -9,3 +9,9 @@ export interface CreateItemRequest{
   width: number,
   height: number
 }
+
+export interface CreatePalleteRequest{
+  height: number,
+  width: number,
+  depth: number
+}

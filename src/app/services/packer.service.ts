@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { NotificationsService } from './notifications.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,21 +21,24 @@ export class PackerService {
   config: BehaviorSubject<PackerConfig> = new BehaviorSubject(this.defaultConfig);
   config$ : Observable<PackerConfig> = this.config.asObservable();
 
-  constructor() { }
+  constructor(
+    private notificationService: NotificationsService
+  ) { }
 
-  updateConfig(data){
+  updateConfig(data: PackerConfig){
     let config: PackerConfig = {
       width: data.width,
       height: data.height,
       depth: data.depth,
       padding: data.padding,
-      algorithm: Algorithm[String(data.algorithm)],
+      algorithm: Algorithm.BRUTE_FORCE,
       limit: data.limit,
       pallete_count: data.pallete_count,
       item_depth: data.item_depth
     }
 
     this.config.next(config)
+    this.notificationService.showSuccess("Konfiguracija primjenjena")
   }
 
 }

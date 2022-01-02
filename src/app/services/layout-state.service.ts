@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
+import { TRISTATECHECKBOX_VALUE_ACCESSOR } from 'primeng/tristatecheckbox';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LayoutStateService {
+
+  darkTheme: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  darkTheme$: Observable<boolean> = this.darkTheme.asObservable();
 
   itemFormDialog: BehaviorSubject<boolean> = new BehaviorSubject(false);
   itemFormDialog$: Observable<boolean> = this.itemFormDialog.asObservable();

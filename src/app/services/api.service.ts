@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Warrant } from '../components/dialogs/importer-dialog/importer-dialog.component';
-import { CreateItemRequest, CreateWarrantRequest } from '../requestModels/CreateWarrantRequest';
+import { CreateItemRequest, CreatePalleteRequest, CreateWarrantRequest } from '../requestModels/CreateWarrantRequest';
 import { NotificationsService } from './notifications.service';
 
 const HOST = environment.apiHost;
@@ -14,6 +14,9 @@ const GET_WARRANTS = HOST + '/api/warrants/getwarrants';
 
 const CREATE_ITEM = HOST + '/api/item/createitem';
 const GET_ITEMS = HOST + '/api/item/getallitems';
+
+const CREATE_PALLETE = HOST + '/api/pallets/addpallet';
+const GET_PALLETES = HOST + '/api/pallets/getlistofpallets';
 
 @Injectable({
   providedIn: 'root'
@@ -41,8 +44,6 @@ export class ApiService {
   }
 
   getWarrants(){
-    this.notificationService.toggleProgress();
-
     return this.http.get(GET_WARRANTS).pipe(
       map( (items: any[]) => {
         return items.map( item => {
@@ -74,9 +75,32 @@ export class ApiService {
   }
 
   getItems(){
+    return this.http.get(GET_ITEMS).pipe(
+      catchError( error => {
+        this.notificationService.toggleProgress();
+        this.notificationService.showError(error.message)
+        return of(0)
+      })
+    )
+  }
+
+  createPallete(pallete: CreatePalleteRequest){
     this.notificationService.toggleProgress();
 
-    return this.http.get(GET_ITEMS).pipe(
+    this.http.post(CREATE_PALLETE, pallete).subscribe(
+      res => {
+        this.notificationService.toggleProgress();
+        this.notificationService.showSuccess("Paleta sačuvana")
+      },
+      error => {
+        this.notificationService.toggleProgress();
+        this.notificationService.showError(error.message)
+      }
+    );
+  }
+
+  getPalletes(){
+    return this.http.get(GET_PALLETES).pipe(
       catchError( error => {
         this.notificationService.toggleProgress();
         this.notificationService.showError(error.message)
