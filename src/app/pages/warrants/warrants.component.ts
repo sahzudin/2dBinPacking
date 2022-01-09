@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfirmationService } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 import { DataService } from 'src/app/services/data.service';
@@ -15,7 +16,8 @@ export class WarrantsComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private dataService: DataService
+    private dataService: DataService,
+    private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit(): void {
@@ -29,6 +31,24 @@ export class WarrantsComponent implements OnInit {
 
   loadWarrant(warrant){
     this.dataService.loadWarrant(warrant)
+  }
+
+  deleteWarrant(warrant, event){
+    console.log(event);
+
+      this.confirmationService.confirm({
+          target: event.target,
+          message: 'Jeste li sigurni da želite obrisati nalog?',
+          icon: 'pi pi-exclamation-triangle',
+          acceptLabel: 'Da',
+          rejectLabel: 'Ne',
+          accept: () => {
+            this.apiService.deleteWarrant(warrant.id)
+          },
+          reject: () => {
+              //reject action
+          }
+      });
   }
 
 }

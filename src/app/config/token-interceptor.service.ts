@@ -11,6 +11,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
+import { NotificationsService } from '../services/notifications.service';
 
 
 @Injectable({
@@ -20,7 +21,8 @@ export class TokenInterceptorService implements HttpInterceptor{
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private notificationService: NotificationsService
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
@@ -42,6 +44,7 @@ export class TokenInterceptorService implements HttpInterceptor{
         localStorage.removeItem('auth-token')
         localStorage.removeItem('auth-user')
         this.router.navigate(['']);
+        this.notificationService.showError("Pristup nije dozvoljen")
         return of(err.message);
     }
       return throwError(err);

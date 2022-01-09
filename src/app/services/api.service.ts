@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -11,6 +11,7 @@ const HOST = environment.apiHost;
 
 const CREATE_WARRANT = HOST + '/api/warrants/createwarrant';
 const GET_WARRANTS = HOST + '/api/warrants/getwarrants';
+const UPLOAD_WARRANT = HOST + '/api/warrants/uploadwarrant';
 
 const CREATE_ITEM = HOST + '/api/item/createitem';
 const GET_ITEMS = HOST + '/api/item/getallitems';
@@ -41,6 +42,40 @@ export class ApiService {
         this.notificationService.showError(error.message)
       }
     );
+  }
+
+  deleteWarrant(id){
+    this.notificationService.toggleProgress()
+    const url = HOST + `/api/warrants/delete/${id}`
+    this.http.delete(url).subscribe(
+      res => {
+        this.notificationService.toggleProgress();
+        this.notificationService.showSuccess("Nalog obrisan")
+      },
+      error => {
+        this.notificationService.toggleProgress();
+        this.notificationService.showError(error.message)
+      }
+    )
+  }
+
+  uploadWarrant(data){
+    this.notificationService.toggleProgress();
+    const httpOptions = {
+      headers: new HttpHeaders({
+       "Content-Type": "multipart/form-data"
+      })
+    };
+    this.http.post(UPLOAD_WARRANT, data, httpOptions).subscribe(
+      res => {
+        this.notificationService.toggleProgress();
+        this.notificationService.showSuccess("Nalog učitan")
+      },
+      error => {
+        this.notificationService.toggleProgress();
+        this.notificationService.showError(error.message)
+      }
+    )
   }
 
   getWarrants(){

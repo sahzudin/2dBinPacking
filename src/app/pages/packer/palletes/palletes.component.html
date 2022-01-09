@@ -8,9 +8,12 @@
     </div>
   </div>
   <div class="pallete-sheets">
-    <h3>Raspored na paleti</h3>
+    <div class="palletes-header">
+      <h3>Raspored na paleti</h3>
+      <button pButton pRipple type="button" icon="pi pi-print" class="p-button-rounded" (click)="print()"></button>
+    </div>
 
-    <swiper [config]="swiperConfig" [navigation]="true" [pagination]="true" >
+    <swiper [config]="swiperConfig" [navigation]="true" [pagination]="true" id="printable">
       <ng-template swiperSlide class="sheet-container" *ngFor="let sheet of selectedPallete">
         <p class="efficiency">{{sheet.efficiency | number: '1.2-2'}}% iskorištenost</p>
 

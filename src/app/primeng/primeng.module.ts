@@ -10,7 +10,7 @@ import {BadgeModule} from 'primeng/badge';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {ToastModule} from 'primeng/toast';
 import {InputSwitchModule} from 'primeng/inputswitch';
-
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
 
 @NgModule({
   declarations: [],
@@ -25,7 +25,8 @@ import {InputSwitchModule} from 'primeng/inputswitch';
     BadgeModule,
     ProgressBarModule,
     ToastModule,
-    InputSwitchModule
+    InputSwitchModule,
+    ConfirmPopupModule
   ],
   exports: [
     TableModule,
@@ -37,7 +38,8 @@ import {InputSwitchModule} from 'primeng/inputswitch';
     BadgeModule,
     ProgressBarModule,
     ToastModule,
-    InputSwitchModule
+    InputSwitchModule,
+    ConfirmPopupModule
   ]
 })
 export class PrimengModule { }

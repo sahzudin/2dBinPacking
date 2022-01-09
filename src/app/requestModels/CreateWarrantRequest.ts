@@ -1,6 +1,7 @@
 import { Timestamp } from "rxjs/internal/operators/timestamp";
 
 export interface CreateWarrantRequest{
+    name: string
     items: string,
     created_at: number
 }

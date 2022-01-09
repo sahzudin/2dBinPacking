@@ -21,7 +21,7 @@ import { NewWarrantComponent } from './pages/new-warrant/new-warrant.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { TokenInterceptorService } from './config/token-interceptor.service';
 import { MessageService } from 'primeng/api';
-
+import {ConfirmationService} from 'primeng/api';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +51,8 @@ import { MessageService } from 'primeng/api';
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},
-    MessageService
+    MessageService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent]
 })

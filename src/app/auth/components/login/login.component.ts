@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  error;
   loginForm: FormGroup;
 
   constructor(
@@ -26,6 +27,11 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    this.authService.login(this.loginForm.value);
+    this.authService.login(this.loginForm.value).subscribe(
+      res => {},
+      err => {
+        this.error = err
+      }
+    );
   }
 }

@@ -4,7 +4,7 @@
       <img src="/assets/images/logo.png" alt="logo">
     </div>
 
-    <div class="form" [formGroup]="loginForm">
+    <div class="form" [formGroup]="loginForm" (keyup.enter)="login()">
       <div class="input-container">
         <label for="email">Username</label>
         <input type="text" formControlName="username">
@@ -15,6 +15,10 @@
         <input type="password" formControlName="password">
         <div class="error" *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">Password is required</div>
       </div>
+
+      <ng-container *ngIf="error">
+        <p class="text-danger">Desila se greška, pokušajte ponovo.</p>
+      </ng-container>
 
       <div class="actions">
         <button pButton pRipple type="button" label="Forgot password?" class="p-button-text"></button>

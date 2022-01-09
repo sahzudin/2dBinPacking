@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, LOCALE_ID } from '@angular/core';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 const TOKEN_KEY = 'auth-token'
@@ -60,18 +61,14 @@ export class AuthService {
   }
 
   public login(credentials){
-    this.http.post(LOGIN_ROUTE, credentials).subscribe(
-      (res: any) => {
+    return this.http.post(LOGIN_ROUTE, credentials).pipe(
+      tap( (res:any) => {
         if(res.token && res.token.length > 0){
           this.saveToken(res.token);
           this.checkJwt();
           this.router.navigate(['packer'])
         }
-      },
-      error => {
-        console.log(error);
-
-      }
+      })
     )
   }
 

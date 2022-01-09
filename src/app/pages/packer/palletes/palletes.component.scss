@@ -40,6 +40,11 @@
       width: calc(100% - 250px - 20px);
     }
 
+    .palletes-header{
+      display: flex;
+      justify-content: space-between;
+    }
+
     .sheet-container{
       display: flex;
       justify-content: center;

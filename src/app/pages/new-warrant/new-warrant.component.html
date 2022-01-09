@@ -1,6 +1,7 @@
 <div class="content-container">
     <form [formGroup]="form">
 
+      <div class="inline-group-container">
         <div class="form-group">
           <label for="Width">Širina</label>
           <input type="number" formControlName="width"/>
@@ -13,7 +14,9 @@
 
         <p-button label="Dodaj" icon="pi pi-plus" styleClass="p-button-sm" (click)="add()"></p-button>
         <p-button label="Sačuvaj uzorak" icon="pi pi-save" styleClass="p-button-sm" (click)="saveItem()"></p-button>
+      </div>
 
+      <div class="inline-group-container">
         <ng-container *ngIf=" savedItems$ | async as savedItems">
           <div class="form-group">
             <label for="savedItems">Sačuvani elementi ({{savedItems.length}})</label>
@@ -22,9 +25,30 @@
             </select>
           </div>
 
-          <p-button label="Dodaj" icon="pi pi-plus" styleClass="p-button-sm" (click)="addSavedItem()"></p-button>
+          <p-button label="Dodaj" icon="pi pi-plus" styleClass="p-button-sm" [disabled]="form.controls['savedItem'].status == 'INVALID' " (click)="addSavedItem()" ></p-button>
         </ng-container>
+      </div>
 
+    </form>
+
+    <form class="save-warrant-form" [formGroup]="saveWarrantForm">
+      <div>
+        <div class="inline-group-container" *ngIf="warrant.items.length > 0">
+          <div class="form-group">
+            <label for="Height">Šifra naloga</label>
+            <input type="text" formControlName="name"/>
+          </div>
+
+          <p-button  label="Sačuvaj" icon="pi pi-save" styleClass="p-button-sm" (click)="save()"></p-button>
+        </div>
+      </div>
+
+      <div class="inline-group-container">
+        <div class="form-group" style="flex-direction: row; align-items: center;">
+          <label style="margin-right: 10px">Učitaj iz fajla</label>
+          <input type="file" (change)="onFileSelected($event)"/>
+        </div>
+      </div>
     </form>
 
     <div class="items-container">
@@ -44,8 +68,6 @@
                 </tr>
             </ng-template>
         </p-table>
-
-        <p-button *ngIf="warrant.items.length > 0" label="Sačuvaj" icon="pi pi-save" styleClass="p-button-sm" (click)="save()"></p-button>
     </div>
 </div>
 

@@ -15,6 +15,7 @@ import { LayoutStateService } from 'src/app/services/layout-state.service';
 export class NewWarrantComponent implements OnInit {
 
   form: FormGroup;
+  saveWarrantForm: FormGroup
 
   warrant: Warrant;
   savedItems$: Observable<any>;
@@ -31,7 +32,11 @@ export class NewWarrantComponent implements OnInit {
       width: [100, [Validators.required]],
       height: [100, [Validators.required]],
       quantity: [1, [Validators.required]],
-      savedItem: [{}]
+      savedItem: [null, [Validators.required]]
+    })
+
+    this.saveWarrantForm = this.fb.group({
+      name: ['']
     })
 
     this.ds.warrant$.subscribe(res => {
@@ -51,7 +56,9 @@ export class NewWarrantComponent implements OnInit {
 
   addSavedItem(){
     let item = this.form.controls['savedItem'].value
-    this.ds.addItem(item)
+    if(item != null){
+      this.ds.addItem(item)
+    }
   }
 
   remove(item){
@@ -60,6 +67,7 @@ export class NewWarrantComponent implements OnInit {
 
   save(){
     let request: CreateWarrantRequest = {
+      name: this.saveWarrantForm.controls['name'].value,
       items: JSON.stringify(this.warrant.items),
       created_at: Date.now()
     }
@@ -74,6 +82,18 @@ export class NewWarrantComponent implements OnInit {
     }
 
     this.apiService.createItem(request)
+  }
+
+  onFileSelected(event) {
+
+    const formData: FormData = new FormData();
+    let files = event.target.files;
+
+    for (var i = 0; i < files.length; i++) {
+      formData.append('warrant', files[i])
+    }
+
+    this.apiService.uploadWarrant(formData)
   }
 
 }
