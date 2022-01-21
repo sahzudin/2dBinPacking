@@ -1,10 +1,10 @@
 <div class="content-container">
-    <form [formGroup]="form">
+    <form [formGroup]="form" (keyup.enter)="add()">
 
       <div class="inline-group-container">
         <div class="form-group">
           <label for="Width">Širina</label>
-          <input type="number" formControlName="width"/>
+          <input type="number" formControlName="width" #focus />
         </div>
 
         <div class="form-group">
@@ -12,7 +12,7 @@
           <input type="number" formControlName="height"/>
         </div>
 
-        <p-button label="Dodaj" icon="pi pi-plus" styleClass="p-button-sm" (click)="add()"></p-button>
+        <p-button label="Dodaj" icon="pi pi-plus" styleClass="p-button-sm" (click)="add()" [disabled]="form.invalid"></p-button>
         <p-button label="Sačuvaj uzorak" icon="pi pi-save" styleClass="p-button-sm" (click)="saveItem()"></p-button>
       </div>
 

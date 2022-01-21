@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Warrant } from '../components/dialogs/importer-dialog/importer-dialog.component';
 import { CreateItemRequest, CreatePalleteRequest, CreateWarrantRequest } from '../requestModels/CreateWarrantRequest';
 import { NotificationsService } from './notifications.service';
 
@@ -61,12 +60,7 @@ export class ApiService {
 
   uploadWarrant(data){
     this.notificationService.toggleProgress();
-    const httpOptions = {
-      headers: new HttpHeaders({
-       "Content-Type": "multipart/form-data"
-      })
-    };
-    this.http.post(UPLOAD_WARRANT, data, httpOptions).subscribe(
+    this.http.post(UPLOAD_WARRANT, data).subscribe(
       res => {
         this.notificationService.toggleProgress();
         this.notificationService.showSuccess("Nalog učitan")

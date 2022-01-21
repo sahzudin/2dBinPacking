@@ -8,6 +8,17 @@
         border-radius: 5px;
         padding: 20px;
         width: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .unused-items{
+          margin: -20px;
+
+          ::ng-deep button{
+            width: 100%;
+          }
+        }
 
         h3{
           margin: 0 -20px;

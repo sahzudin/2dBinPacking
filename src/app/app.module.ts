@@ -14,7 +14,6 @@ import { ItemsDialogComponent } from './components/dialogs/items-dialog/items-di
 import { PackerComponent } from './pages/packer/packer.component';
 import { PalletesComponent } from './pages/packer/palletes/palletes.component';
 import { SwiperModule } from 'swiper/angular';
-import { ImporterDialogComponent } from './components/dialogs/importer-dialog/importer-dialog.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { WarrantsComponent } from './pages/warrants/warrants.component';
 import { NewWarrantComponent } from './pages/new-warrant/new-warrant.component';
@@ -31,7 +30,6 @@ import {ConfirmationService} from 'primeng/api';
     ItemsDialogComponent,
     PackerComponent,
     PalletesComponent,
-    ImporterDialogComponent,
     WarrantsComponent,
     NewWarrantComponent,
     SettingsComponent

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Item } from 'src/Packer/Item';
 import { Packer } from 'src/Packer/Packer';
-import { Warrant } from '../components/dialogs/importer-dialog/importer-dialog.component';
 import { NotificationsService } from './notifications.service';
 
 @Injectable({
@@ -11,7 +10,8 @@ import { NotificationsService } from './notifications.service';
 export class DataService {
 
   defaultWarrant: Warrant = {
-    items: []
+    items: [],
+    unusedItems: []
   }
 
   warrant: BehaviorSubject<Warrant> = new BehaviorSubject(this.defaultWarrant);
@@ -30,12 +30,12 @@ export class DataService {
     let warrant = this.warrant.getValue();
 
     if(warrant.items.length > 0){
-      newItem.id = warrant.items.slice(-1)[0].id + 1;
+      newItem.id = Math.random().toString(36).slice(2)
     }else{
       newItem.id = 1;
     }
 
-    warrant.items = [...warrant.items, newItem]
+    warrant.items = [newItem, ...warrant.items]
 
     this.warrant.next(warrant)
 
@@ -68,4 +68,12 @@ export class DataService {
     this.itemCount.next(warrant.items.length)
     this.notificationService.showSuccess("Nalog učitan")
   }
+}
+
+export interface Warrant{
+  id?: number,
+  owner?: string,
+  created_at?: string,
+  items?: Item[],
+  unusedItems?: Item[]
 }

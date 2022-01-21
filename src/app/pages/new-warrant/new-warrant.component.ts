@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Warrant } from 'src/app/components/dialogs/importer-dialog/importer-dialog.component';
 import { CreateItemRequest, CreateWarrantRequest } from 'src/app/requestModels/CreateWarrantRequest';
 import { ApiService } from 'src/app/services/api.service';
-import { DataService } from 'src/app/services/data.service';
+import { DataService, Warrant } from 'src/app/services/data.service';
 import { LayoutStateService } from 'src/app/services/layout-state.service';
 
 @Component({
@@ -13,6 +12,8 @@ import { LayoutStateService } from 'src/app/services/layout-state.service';
   styleUrls: ['./new-warrant.component.scss']
 })
 export class NewWarrantComponent implements OnInit {
+
+  @ViewChild('focus') focusElement: ElementRef
 
   form: FormGroup;
   saveWarrantForm: FormGroup
@@ -29,10 +30,10 @@ export class NewWarrantComponent implements OnInit {
   ngOnInit(): void {
 
     this.form = this.fb.group({
-      width: [100, [Validators.required]],
-      height: [100, [Validators.required]],
-      quantity: [1, [Validators.required]],
-      savedItem: [null, [Validators.required]]
+      width: [100, [Validators.required, Validators.min(0)]],
+      height: [100, [Validators.required, Validators.min(0)]],
+      quantity: [1, []],
+      savedItem: [null, []]
     })
 
     this.saveWarrantForm = this.fb.group({
@@ -52,6 +53,8 @@ export class NewWarrantComponent implements OnInit {
 
   add(){
     this.ds.addItem(this.form.value)
+    this.focusElement.nativeElement.focus()
+    this.focusElement.nativeElement.select()
   }
 
   addSavedItem(){

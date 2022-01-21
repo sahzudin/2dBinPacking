@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { PackerConfig } from 'src/app/services/packer.service';
 import { Packer } from 'src/Packer/Packer';
 import { Sheet } from 'src/Packer/Sheet';
@@ -6,6 +6,7 @@ import { SwiperOptions } from 'swiper';
 
 // import Swiper core and required modules
 import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
+import { Item } from 'src/Packer/Item';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Scrollbar]);
@@ -17,6 +18,8 @@ SwiperCore.use([Navigation, Pagination, Scrollbar]);
 })
 export class PalletesComponent implements OnInit, OnChanges {
 
+  display: boolean = false;
+  @Input() unusedItems: Item[]
   @Input() palletes: [Sheet[]]
   @Input() config: PackerConfig
   @Input() itemsCount: number
@@ -30,6 +33,7 @@ export class PalletesComponent implements OnInit, OnChanges {
   }
 
   constructor(
+    private cdRef: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -37,6 +41,9 @@ export class PalletesComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges){
+    console.log(changes);
+    
+    this.cdRef.detectChanges()
     if(changes.palletes){
       this.selectedPallete = this.palletes[0];
       this.selectedPallete.sort( (a: Sheet, b: Sheet) => a.efficiency - b.efficiency).reverse()

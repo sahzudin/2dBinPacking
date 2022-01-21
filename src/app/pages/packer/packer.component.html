@@ -10,7 +10,7 @@
 
     <p-button (click)="pack()" label="Pakuj" icon="pi pi-box" class="pack-button" *ngIf="(itemCount$ | async) > 0"></p-button>
 
-    <app-palletes [palletes]="packer.palletes" [config]="packer.config" [itemsCount]="packer.warrant.items.length"></app-palletes>
+    <app-palletes [palletes]="packer.palletes" [unusedItems]="packer.unusedItems" [config]="packer.config" [itemsCount]="packer.warrant.items.length"></app-palletes>
 
     <div class="wrapper">
 

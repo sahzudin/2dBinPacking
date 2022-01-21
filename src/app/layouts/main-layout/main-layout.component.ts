@@ -18,7 +18,6 @@ export class MainLayoutComponent implements OnInit, AfterViewChecked  {
   isPacking: boolean;
 
   itemCount$: Observable<any>;
-  tooltipItems: MenuItem[]
   sidebarMenuItems: SidebarMenuItem[] = [
     {label: 'Lista naloga', icon: 'pi pi-list', route: 'warrants'},
     {label: 'Novi nalog', icon: 'pi pi-plus', route: 'warrants/new'},
@@ -45,16 +44,6 @@ export class MainLayoutComponent implements OnInit, AfterViewChecked  {
     this.packer.packing.subscribe(isPacking => {
       this.notificationService.progressBar.next(isPacking)
     })
-
-    this.tooltipItems = [
-      {
-        icon: 'pi pi-plus',
-        tooltipOptions: {
-          tooltipLabel: 'Dodaj artikal'
-        },
-        command: () => this.layoutService.openItemFormDialog()
-      }
-    ]
 
     this.itemCount$ = this.dataService.itemCount$;
   }

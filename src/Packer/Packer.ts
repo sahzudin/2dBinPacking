@@ -1,6 +1,5 @@
 import { Injectable, OnChanges, SimpleChanges } from "@angular/core";
-import { Warrant } from "src/app/components/dialogs/importer-dialog/importer-dialog.component";
-import { DataService } from "src/app/services/data.service";
+import { DataService, Warrant } from "src/app/services/data.service";
 import { Algorithm, PackerConfig, PackerService } from "src/app/services/packer.service";
 import { Item } from "./Item";
 import { Sheet } from "./Sheet";
@@ -32,7 +31,7 @@ export class Packer {
   bestUsedPalletes: [Sheet[]] = [[]]
   packing: BehaviorSubject<boolean> = new BehaviorSubject(false);
   packing$: Observable<boolean> = this.packing.asObservable();
-
+  unusedItems: Item[]
 
   constructor(
     private packerService: PackerService,
@@ -128,6 +127,8 @@ export class Packer {
       //If it's not bruce force just place the sheeets in palletes
       this.placeSheetsIntoPalletes()
     }
+
+    this.unusedItems = items.filter( item => !item.used)
   }
 
   palletesSheetCount(){
