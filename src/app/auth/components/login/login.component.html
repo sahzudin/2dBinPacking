@@ -6,14 +6,14 @@
 
     <div class="form" [formGroup]="loginForm" (keyup.enter)="login()">
       <div class="input-container">
-        <label for="email">Username</label>
+        <label for="email">Korisničko ime</label>
         <input type="text" formControlName="username">
-        <div class="error" *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].invalid">Username is required</div>
+        <div class="error" *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].invalid">Korisničko ime je obavezno</div>
       </div>
       <div class="input-container">
-        <label for="password">Password</label>
+        <label for="password">Lozinka</label>
         <input type="password" formControlName="password">
-        <div class="error" *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">Password is required</div>
+        <div class="error" *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">Lozinka je obavezna</div>
       </div>
 
       <ng-container *ngIf="error">
@@ -21,8 +21,7 @@
       </ng-container>
 
       <div class="actions">
-        <button pButton pRipple type="button" label="Forgot password?" class="p-button-text"></button>
-        <p-button label="Login" (click)="login()" [disabled]="loginForm.invalid"></p-button>
+        <p-button label="Prijavi se" (click)="login()" [disabled]="loginForm.invalid"></p-button>
       </div>
     </div>
   </div>
